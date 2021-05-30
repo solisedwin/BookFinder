@@ -21,3 +21,12 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# miscellaneous
+package-lock.json
+package.json
+.eslintcache
+.vscode/
+postcss.config.js
+src/react-app-env.d.ts
+
