@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Login from './Forms/Login';
 import Register from './Forms/Register';
 import { Box } from "@chakra-ui/react"
+import { Link } from "@chakra-ui/react"
+import { Text } from "@chakra-ui/react"
 
 
 const FormBox = () => {
@@ -22,11 +24,13 @@ const FormBox = () => {
     }
 
     return (
-        <Box borderWidth='2px' boxSize='xl' mt={200}>
+        <Box mt={200}>
             {formView}
-            <p onClick={changeForm}>
-                {formMessage}
-            </p>
+            <Link onClick={changeForm} href='#'>
+                <Text fontSize='xl' mt={3} color='azure'>
+                    {formMessage}
+                </Text>
+            </Link>
         </Box>
     )
 

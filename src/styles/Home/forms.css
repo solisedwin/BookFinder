@@ -1,14 +1,24 @@
 
 input[type='text'], input[type='password'] { 
-    background-color: #163340;
+    background-color: #212b36;
     border-bottom-color: grey;
     border-bottom-style: solid;
     border-bottom-width: 1px;
-
+    font-size: larger;
+    padding-left: 0.5rem;
+    color: azure;
+    width: 30rem;
 }
 
 
 input[type='text']:focus, input[type='password']:focus { 
-background-color: blueviolet;
+  background-color: none;
   border-bottom-color: greenyellow;
+  color: azure;
+  outline: none;
+  
+}
+
+.form-error{
+    color:red;
 }
