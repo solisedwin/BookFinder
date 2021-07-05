@@ -10,44 +10,50 @@ import * as Yup from 'yup';
 interface RegisterUser {
     username: string,
     password: string,
-    reEnterPassword: string
+    passwordConfirmation: string
 }
 
 const Register = () => {
-
     const initialValues = {
         username: "",
         password: "",
-        reEnterPassword: "",
+        passwordConfirmation: "",
     }
 
     const onSubmit = (formValues: RegisterUser) => {
         console.log('We submitted the registeration form ! ', formValues)
+        alert('Alert ! We submitted the registeration form ! ' + JSON.stringify(formValues))
     }
 
-    //Must have atleast 1 uppercase, 1 lowercase letter, 1 number, and 1 special character.
-    //const passwordRegExp = new RegExp('/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$/')
+    const lowercaseRegex = new RegExp('(?=[a-z]+)');
+    const uppercaseRegex = new RegExp('(?=[A-Z]+)');
+    const numericRegex = new RegExp('(?=[0-9]+)');
+    const noSpacesRegex = new RegExp('^\\S*$');
 
-    const lowercaseRegex = new RegExp('(?=.*[a-z])');
-    const uppercaseRegex = new RegExp('(?=.*[A-Z])');
-    const numericRegex = new RegExp('(?=.*[0-9])');
-
-    const registertionFormSchema = Yup.object({
+    const registertionFormSchema = Yup.object().shape({
         username: Yup.string()
             .min(6, 'Minimum characters is 6')
             .max(16, 'Maximum characters is 16')
-            .trim('No trailing or leading white spaces')
+            .matches(noSpacesRegex, 'No spaces allowed !')
+            .test(`test-legal-special-characters`, 'Certain special characters are not allowed. Try again!', function (value) {
+                const charactersNotAllowed = new RegExp('([^a-zA-z0-9!_@])')
+                return !charactersNotAllowed.test(value)
+            })
             .required('Required'),
-        password: Yup.string()
+        pasword: Yup.string()
             .matches(lowercaseRegex, 'one lowercase required!')
             .matches(uppercaseRegex, 'one uppercase required!')
             .matches(numericRegex, 'one number required!')
+            .matches(noSpacesRegex, 'No spaces allowed !')
             .min(7, 'Password is too short !')
             .max(24, 'Password is too long ! ')
-            .trim('No trailing or leading white spaces')
+            .test(`test-legal-special-characters`, 'Certain special characters are not allowed. Try again!', function (value) {
+                const charactersNotAllowed = new RegExp('([^a-zA-z0-9!_@])')
+                return !charactersNotAllowed.test(value)
+            })
             .required('Required'),
         passwordConfirmation: Yup.string()
-            .oneOf([Yup.ref('password'), null], 'Password must be the same!')
+            .oneOf([Yup.ref('password')], 'Password must be the same!')
             .required('Required')
     });
 
@@ -94,7 +100,6 @@ const Register = () => {
                                 <ErrorMessage name='passwordConfirmation' component={TextError} />
 
                                 <Button colorScheme="green" fontSize='larger' type='submit'>Register</Button>
-
                             </VStack>
                         </Form>
                     )
