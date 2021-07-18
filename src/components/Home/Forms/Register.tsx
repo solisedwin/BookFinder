@@ -25,32 +25,32 @@ const Register = () => {
         alert('Alert ! We submitted the registeration form ! ' + JSON.stringify(formValues))
     }
 
-    const lowercaseRegex = new RegExp('(?=[a-z]+)');
-    const uppercaseRegex = new RegExp('(?=[A-Z]+)');
-    const numericRegex = new RegExp('(?=[0-9]+)');
-    const noSpacesRegex = new RegExp('^\\S*$');
+    const lowercaseRegex = new RegExp('[a-z]');
+    const uppercaseRegex = new RegExp('[A-Z]');
+    const numericRegex = new RegExp('\\d');
+    const noSpacesRegex = new RegExp('^\\S');
 
-    const registertionFormSchema = Yup.object().shape({
+    const characterValidation = (formValue) => {
+        //The negation of all characters that are allowed 
+        const charactersNotAllowed = new RegExp('[^a-zA-Z0-9!_@]')
+        return !charactersNotAllowed.test(formValue)
+    }
+
+    const registertionFormSchema = Yup.object({
         username: Yup.string()
             .min(6, 'Minimum characters is 6')
             .max(16, 'Maximum characters is 16')
             .matches(noSpacesRegex, 'No spaces allowed !')
-            .test(`test-legal-special-characters`, 'Certain special characters are not allowed. Try again!', function (value) {
-                const charactersNotAllowed = new RegExp('([^a-zA-z0-9!_@])')
-                return !charactersNotAllowed.test(value)
-            })
+            .test(`test-legal-special-characters`, 'Certain special characters are not allowed. Try again!', characterValidation)
             .required('Required'),
-        pasword: Yup.string()
+        password: Yup.string()
             .matches(lowercaseRegex, 'one lowercase required!')
             .matches(uppercaseRegex, 'one uppercase required!')
             .matches(numericRegex, 'one number required!')
             .matches(noSpacesRegex, 'No spaces allowed !')
             .min(7, 'Password is too short !')
             .max(24, 'Password is too long ! ')
-            .test(`test-legal-special-characters`, 'Certain special characters are not allowed. Try again!', function (value) {
-                const charactersNotAllowed = new RegExp('([^a-zA-z0-9!_@])')
-                return !charactersNotAllowed.test(value)
-            })
+            .test(`test-legal-special-characters`, 'Certain special characters are not allowed. Try again!', characterValidation)
             .required('Required'),
         passwordConfirmation: Yup.string()
             .oneOf([Yup.ref('password')], 'Password must be the same!')
@@ -99,7 +99,7 @@ const Register = () => {
                                 />
                                 <ErrorMessage name='passwordConfirmation' component={TextError} />
 
-                                <Button colorScheme="green" fontSize='larger' type='submit'>Register</Button>
+                                <Button colorScheme="green" type='button' fontSize='larger'>Register</Button>
                             </VStack>
                         </Form>
                     )
