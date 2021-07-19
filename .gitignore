@@ -24,7 +24,6 @@ yarn-error.log*
 
 # miscellaneous
 package-lock.json
-package.json
 .eslintcache
 .vscode/
 postcss.config.js

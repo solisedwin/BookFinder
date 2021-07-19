@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React from 'react';
 import { ErrorMessage, Formik, Form, Field } from 'formik';
 //import FormikControl from './FormikControl'
@@ -20,10 +21,11 @@ const Register = () => {
         passwordConfirmation: "",
     }
 
-    const onSubmit = (formValues: RegisterUser) => {
-        console.log('We submitted the registeration form ! ', formValues)
-        alert('Alert ! We submitted the registeration form ! ' + JSON.stringify(formValues))
+    const onSubmit = (registerUserForm: RegisterUser) => {
+        alert('Alert ! We submitted the registeration form ! ' + JSON.stringify(registerUserForm))
+        axios.post('http://192.168.1.26:3000/register', registerUserForm)
     }
+
 
     const lowercaseRegex = new RegExp('[a-z]');
     const uppercaseRegex = new RegExp('[A-Z]');
