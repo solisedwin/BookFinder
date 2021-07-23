@@ -6,7 +6,7 @@ import { Link } from "@chakra-ui/react"
 import { Text } from "@chakra-ui/react"
 
 
-const FormBox = () => {
+const FormBox = (props:any) => {
     const [isRegisterForm, setisRegisterForm] = useState(true)
 
     let formView: JSX.Element;

@@ -8,7 +8,7 @@ import TextError from './TextError'
 
 import * as Yup from 'yup';
 
-interface RegisterUser {
+interface IRegisterUser {
     username: string,
     password: string,
     passwordConfirmation: string
@@ -21,7 +21,7 @@ const Register = () => {
         passwordConfirmation: "",
     }
 
-    const submitRegistrationForm = (registerUserForm: RegisterUser) => {
+    const submitRegistrationForm = (registerUserForm: IRegisterUser) => {
         alert('Alert ! We submitted the registeration form ! ' + JSON.stringify(registerUserForm))
         axios.post('http://localhost:3001/register', registerUserForm)
             .catch(error => {
@@ -36,18 +36,26 @@ const Register = () => {
     const numericRegex = new RegExp('\\d');
     const noSpacesRegex = new RegExp('^\\S');
 
-    const characterValidation = (formValue) => {
+
+    /*
+    const characterValidation = (formValue: string) => {
         //The negation of all characters that are allowed 
         const charactersNotAllowed = new RegExp('[^a-zA-Z0-9!_@]')
         return !charactersNotAllowed.test(formValue)
     }
+    */
+   
 
     const registertionFormSchema = Yup.object({
         username: Yup.string()
             .min(6, 'Minimum characters is 6')
             .max(16, 'Maximum characters is 16')
             .matches(noSpacesRegex, 'No spaces allowed !')
-            .test(`test-legal-special-characters`, 'Certain special characters are not allowed. Try again!', characterValidation)
+            .test(`test-legal-special-characters`, 'Certain special characters/spaces are not allowed. Try again!', formValue => {
+                //The negation of all characters that are allowed 
+                const charactersNotAllowed = new RegExp('[^a-zA-Z0-9!_@]')
+                return !charactersNotAllowed.test(formValue!)
+            })
             .required('Required'),
         password: Yup.string()
             .matches(lowercaseRegex, 'one lowercase required!')
@@ -56,7 +64,11 @@ const Register = () => {
             .matches(noSpacesRegex, 'No spaces allowed !')
             .min(7, 'Password is too short !')
             .max(24, 'Password is too long ! ')
-            .test(`test-legal-special-characters`, 'Certain special characters are not allowed. Try again!', characterValidation)
+            .test(`test-legal-special-characters`, 'Certain special characters/spaces are not allowed. Try again!', formValue => {
+                //The negation of all characters that are allowed 
+                const charactersNotAllowed = new RegExp('[^a-zA-Z0-9!_@]')
+                return !charactersNotAllowed.test(formValue!) 
+            })
             .required('Required'),
         passwordConfirmation: Yup.string()
             .oneOf([Yup.ref('password')], 'Password must be the same!')
