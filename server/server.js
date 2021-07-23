@@ -1,10 +1,11 @@
 const express = require('express')
 const mongoose = require('mongoose')
 //Bypass Same-origin policy
-
 const cors = require('cors')
+
+const path = require('path')
 const app = express();
-const port = 3000;
+const port = 3001;
 
 app.use(cors())
 app.use(express.json());
@@ -22,10 +23,10 @@ connection.once('open', () => {
 })
 */
 
-const registerRouter = require('./routes/register')
+const registerRouter = require('./routes/register.ts')
 
 app.use('/register', registerRouter)
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
-}
+})

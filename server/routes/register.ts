@@ -1,8 +1,9 @@
 'use strict';
 const express = require('express')
 const router = express.Router()
-const mongoose = require('mongoose')
 
 router.post('/', function (req, res) {
-    res.send('Registerinf user !! boy')
+    res.send('<h2>Register function with just slash</h2>')
 })
+
+module.exports = router ;

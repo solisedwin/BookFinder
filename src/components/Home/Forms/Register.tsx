@@ -21,9 +21,13 @@ const Register = () => {
         passwordConfirmation: "",
     }
 
-    const onSubmit = (registerUserForm: RegisterUser) => {
+    const submitRegistrationForm = (registerUserForm: RegisterUser) => {
         alert('Alert ! We submitted the registeration form ! ' + JSON.stringify(registerUserForm))
-        axios.post('http://192.168.1.26:3000/register', registerUserForm)
+        axios.post('http://localhost:3001/register', registerUserForm)
+            .catch(error => {
+                console.log('Error when submitting registeration form. Error Value ' + error)
+                console.log('Registeration form values: ' + JSON.stringify(registerUserForm))
+            })
     }
 
 
@@ -63,7 +67,7 @@ const Register = () => {
         <Formik
             initialValues={initialValues}
             validationSchema={registertionFormSchema}
-            onSubmit={onSubmit}
+            onSubmit={submitRegistrationForm}
         >
             {
                 formik => {
@@ -101,7 +105,7 @@ const Register = () => {
                                 />
                                 <ErrorMessage name='passwordConfirmation' component={TextError} />
 
-                                <Button colorScheme="green" type='button' fontSize='larger'>Register</Button>
+                                <Button colorScheme="green" type='submit' fontSize='larger'>Register</Button>
                             </VStack>
                         </Form>
                     )
