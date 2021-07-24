@@ -9,6 +9,7 @@ const app = express();
 
 require('dotenv').config()
 
+app.use(cors())
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
@@ -22,7 +23,6 @@ app.use(function(req, res, next) {
 });
 
 
-app.use(cors())
 //app.use(express.bodyParser());
 app.use(express.json());
 
