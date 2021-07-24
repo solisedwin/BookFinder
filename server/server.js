@@ -8,6 +8,7 @@ const app = express();
 
 
 require('dotenv').config()
+console.log(process.env)
 
 app.use(cors())
 app.use(function(req, res, next) {
