@@ -6,6 +6,7 @@ const cors = require('cors')
 const path = require('path')
 const app = express();
 
+console.log(process.env)
 
 require('dotenv').config()
 
@@ -40,7 +41,6 @@ const registerRouter = require('./routes/register.ts')
 app.use('/register', registerRouter)
 
 app.set('port',process.env.PORT || 3001)
-console.log('Obama + 'process.env.PORT)
 app.listen(app.get('port') , () => {
     console.log(`Server is running on port: ${app.get('port')}`);
 })

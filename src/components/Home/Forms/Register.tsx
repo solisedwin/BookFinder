@@ -85,7 +85,7 @@ const Register = () => {
                 formik => {
                     return (
                         <Form>
-                            EXAMPLE CODE FOR GITHUB
+                           
                             <VStack
                                 spacing={35}
                                 align='stretch'
