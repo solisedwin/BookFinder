@@ -23,7 +23,7 @@ const Register = () => {
 
     const submitRegistrationForm = (registerUserForm: IRegisterUser) => {
         alert('Alert ! We submitted the registeration form ! ' + JSON.stringify(registerUserForm))
-        axios.post('http://localhost:3001/register', registerUserForm)
+        axios.post('/register', registerUserForm)
             .catch(error => {
                 console.log('Error when submitting registeration form. Error Value ' + error)
                 console.log('Registeration form values: ' + JSON.stringify(registerUserForm))
@@ -85,6 +85,7 @@ const Register = () => {
                 formik => {
                     return (
                         <Form>
+                            EXAMPLE CODE FOR GITHUB
                             <VStack
                                 spacing={35}
                                 align='stretch'

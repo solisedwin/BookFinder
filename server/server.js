@@ -5,7 +5,9 @@ const cors = require('cors')
 
 const path = require('path')
 const app = express();
-const port = 3001;
+
+
+require('dotenv').config()
 
 app.use(cors())
 app.use(express.json());
@@ -27,6 +29,8 @@ const registerRouter = require('./routes/register.ts')
 
 app.use('/register', registerRouter)
 
-app.listen(port, () => {
-    console.log(`Server is running on port: ${port}`);
+app.set('port',process.env.PORT || 3001)
+console.log('Obama + 'process.env.PORT)
+app.listen(app.get('port') , () => {
+    console.log(`Server is running on port: ${app.get('port')}`);
 })
