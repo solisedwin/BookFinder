@@ -8,6 +8,12 @@ import TextError from './TextError'
 
 import * as Yup from 'yup';
 
+require('dotenv').config(
+    {
+        path: `${__dirname}/../.env`
+    }
+)
+
 interface IRegisterUser {
     username: string,
     password: string,
@@ -23,7 +29,7 @@ const Register = () => {
 
     const submitRegistrationForm = (registerUserForm: IRegisterUser) => {
         alert('Alert ! We submitted the registeration form ! ' + JSON.stringify(registerUserForm))
-        axios.post('/register', registerUserForm)
+        axios.post('http://192.168.1.26:3001/register', registerUserForm)
             .catch(error => {
                 console.log('Error when submitting registeration form. Error Value ' + error)
                 console.log('Registeration form values: ' + JSON.stringify(registerUserForm))
@@ -44,7 +50,7 @@ const Register = () => {
         return !charactersNotAllowed.test(formValue)
     }
     */
-   
+
 
     const registertionFormSchema = Yup.object({
         username: Yup.string()
@@ -67,7 +73,7 @@ const Register = () => {
             .test(`test-legal-special-characters`, 'Certain special characters/spaces are not allowed. Try again!', formValue => {
                 //The negation of all characters that are allowed 
                 const charactersNotAllowed = new RegExp('[^a-zA-Z0-9!_@]')
-                return !charactersNotAllowed.test(formValue!) 
+                return !charactersNotAllowed.test(formValue!)
             })
             .required('Required'),
         passwordConfirmation: Yup.string()
@@ -85,7 +91,7 @@ const Register = () => {
                 formik => {
                     return (
                         <Form>
-                           
+
                             <VStack
                                 spacing={35}
                                 align='stretch'
