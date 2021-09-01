@@ -6,12 +6,21 @@ const cors = require('cors')
 const path = require('path')
 const app = express();
 
-
 require('dotenv').config(
   {
-    path: `${__dirname}/../.env`
+    path: '.env.db'
   }
 )
+
+mongoose.connect(`${process.env.MONGODB_URI}`,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(
+    () => console.log('Connected to Mongodb database.'),
+    err => console.log(`Error connecting to database.Error: ${err}`)
+  )
 
 app.use(cors())
 

@@ -30,9 +30,12 @@ const Register = () => {
     const submitRegistrationForm = (registerUserForm: IRegisterUser) => {
         alert('Alert ! We submitted the registeration form ! ' + JSON.stringify(registerUserForm))
         axios.post('http://192.168.1.26:3001/register', registerUserForm)
+            .then(res => {
+                console.log(res);
+                console.log(`Success message: ${res.message}`);
+            })
             .catch(error => {
-                console.log('Error when submitting registeration form. Error Value ' + error)
-                console.log('Registeration form values: ' + JSON.stringify(registerUserForm))
+                console.log('Registeration form values: ' + JSON.stringify(error))
             })
     }
 

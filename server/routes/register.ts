@@ -1,8 +1,7 @@
 
 const express = require('express')
 const router = express.Router()
-let User = require('./../routes/ ');
-
+const UserController = require('./../controllers/User.controller.ts');
 
 require('dotenv').config(
   {
@@ -10,9 +9,7 @@ require('dotenv').config(
   }
 )
 
-
 router.post('/', function (req, res) {
-
   res.send('<h2>Register function with just slash</h2>')
 })
 

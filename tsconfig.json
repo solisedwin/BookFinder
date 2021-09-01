@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "jsx": "react-jsx",
     "lib": [
       "dom",
       "dom.iterable",
       "esnext"
     ],
+    "isolatedModules": true,
+    "jsx": "react-jsx",
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -17,15 +18,15 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
     "noEmit": true
   },
   "include": [
-       "./",
-       "../server/*",
-       "../server/routes/*.ts",
-        "./src/**/*.ts",
-        "./src/**/*.tsx",
-        "/src/*.ts"
+    "./",
+    "../server/*",
+    "../server/controllers/*.ts",
+    "../server/routes/*.ts",
+    "./src/**/*.ts",
+    "./src/**/*.tsx",
+    "/src/*.ts"
   ]
 }
