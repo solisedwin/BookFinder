@@ -1,31 +1,24 @@
 
 //import { Request, Response, NextFunction } from 'express';
+import { DatabaseError } from './../Errors/CustomErrorHandling'
+import { HashingError } from './../Errors/CustomErrorHandling'
 const bcrypt = require('bcrypt');
 const User = require('./../models/user.model.ts')
 
 exports.isUsernameTaken = async (req, res, next) => {
     const username = req.body.username
 
-    User.findOne(
-        { 'username': username }
-    )
+    User.findOne({ 'username': username })
         .then(data => {
-            //Username already exists in database. Client needs to register under a different username
             if (data === null || data.length > 0) {
-                res.status(500).json(
-                    {
-                        //Create error object from another class/file, pass error object instead ??
-                        errorType: 'Database query',
-                        errorView: 'Inline Message',
-                        errorMsg: 'Username already exists in the database. Choose another username.'
-                    })
+                res.json(
+                    new DatabaseError('Username already exists for another account. Choose a differnt username.', 'Register Page')
+                )
             }
-        }).catch((err) => console.log(`Check similar username process failed. Error:  ' + ${err}`))
+        }).catch(err => console.log(`Check similar username process failed. Error:  ' + ${err}`))
 
-    let user = {}
-    user.userName = username;
-    res.locals.user = user;
-
+    let registerUser = { 'username': username }
+    res.locals.registerUser = registerUser;
     next();
 }
 
@@ -37,29 +30,26 @@ exports.hashPassword = async (req, res, next) => {
 
     const hashedPassword = await bcrypt.hash(password, saltRounds, function (error, hash) {
         if (error) {
-            res.status(500).json(
-                {
-                    errorType: 'Hashing',
-                    errorView: 'Page',
-                    errorMsg: 'There has been an internal error. Please try again in a few mintues. Our apologies.'
-                })
+            res.json(
+                new HashingError('Error in saving passsword. Try to enter password again. Remember that most special characters are not allowed and other character encodings are not allowed.',
+                    'Register Page')
+            )
         }
         return hash
     });
-    res.locals.user.hashedPassword = hashedPassword;
+    res.locals.registerUser.hashedPassword = hashedPassword;
     next()
 }
 
 exports.saveUser = async (req, res, next) => {
-    const user = res.locals.user;
-
-    const newUser = User(user);
+    const registerUser = res.locals.registerUser;
+    const newUser = User(registerUser);
 
     await newUser.save().then(result => {
         if (!result) {
-            return res.status(500).json({
-                'message': 'Could not save new user into the database';
-            });
+            return res.json(
+                new DatabaseError('Error in trying to save username to database. Try again in 5 mintues.', 'Register Page')
+            );
         }
         res.status(201).json({
             'message': 'New User was created !',

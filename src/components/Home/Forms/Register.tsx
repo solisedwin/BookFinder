@@ -1,10 +1,11 @@
 import axios from 'axios'
 import React from 'react';
 import { ErrorMessage, Formik, Form, Field } from 'formik';
-//import FormikControl from './FormikControl'
+import { DevURL } from './../../../Constants'
 import './../../../styles/Home/forms.css'
 import { VStack, Button } from "@chakra-ui/react"
-import TextError from './TextError'
+import TextError from './../../../Containers/TextError
+import SuccessMessage from './../../../Containers/SuccessMessage'
 
 import * as Yup from 'yup';
 
@@ -29,10 +30,11 @@ const Register = () => {
 
     const submitRegistrationForm = (registerUserForm: IRegisterUser) => {
         alert('Alert ! We submitted the registeration form ! ' + JSON.stringify(registerUserForm))
-        axios.post('http://192.168.1.26:3001/register', registerUserForm)
+        axios.post(`${DevURL}/register`, registerUserForm)
             .then(res => {
+                //User was succesfully created in the database. 
                 console.log(res);
-                console.log(`Success message: ${res.message}`);
+                <SuccessMessage title='Successfully registered as new user!' message={res.message} />
             })
             .catch(error => {
                 console.log('Registeration form values: ' + JSON.stringify(error))
@@ -48,20 +50,19 @@ const Register = () => {
 
     /*
     const characterValidation = (formValue: string) => {
-        //The negation of all characters that are allowed 
+        //The negation of all characters that are allowed
         const charactersNotAllowed = new RegExp('[^a-zA-Z0-9!_@]')
         return !charactersNotAllowed.test(formValue)
     }
     */
-
 
     const registertionFormSchema = Yup.object({
         username: Yup.string()
             .min(6, 'Minimum characters is 6')
             .max(16, 'Maximum characters is 16')
             .matches(noSpacesRegex, 'No spaces allowed !')
-            .test(`test-legal-special-characters`, 'Certain special characters/spaces are not allowed. Try again!', formValue => {
-                //The negation of all characters that are allowed 
+            .test(`test - legal - special - characters`, 'Certain special characters/spaces are not allowed. Try again!', formValue => {
+                //The negation of all characters that are allowed
                 const charactersNotAllowed = new RegExp('[^a-zA-Z0-9!_@]')
                 return !charactersNotAllowed.test(formValue!)
             })
@@ -73,8 +74,8 @@ const Register = () => {
             .matches(noSpacesRegex, 'No spaces allowed !')
             .min(7, 'Password is too short !')
             .max(24, 'Password is too long ! ')
-            .test(`test-legal-special-characters`, 'Certain special characters/spaces are not allowed. Try again!', formValue => {
-                //The negation of all characters that are allowed 
+            .test(`test - legal - special - characters`, 'Certain special characters/spaces are not allowed. Try again!', formValue => {
+                //The negation of all characters that are allowed
                 const charactersNotAllowed = new RegExp('[^a-zA-Z0-9!_@]')
                 return !charactersNotAllowed.test(formValue!)
             })
