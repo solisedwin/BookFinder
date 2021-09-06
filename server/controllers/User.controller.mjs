@@ -1,7 +1,7 @@
 
 //import { Request, Response, NextFunction } from 'express';
-import { DatabaseError } from './../Errors/CustomErrorHandling'
-import { HashingError } from './../Errors/CustomErrorHandling'
+import DatabaseError from './../Errors/CustomErrorHandling.mjs'
+import HashingError from './../Errors/CustomErrorHandling.mjs'
 const bcrypt = require('bcrypt');
 const User = require('./../models/user.model.ts')
 
@@ -11,7 +11,7 @@ exports.isUsernameTaken = async (req, res, next) => {
     User.findOne({ 'username': username })
         .then(data => {
             if (data === null || data.length > 0) {
-                res.json(
+                return res.json(
                     new DatabaseError('Username already exists for another account. Choose a differnt username.', 'Register Page')
                 )
             }
@@ -30,13 +30,13 @@ exports.hashPassword = async (req, res, next) => {
 
     const hashedPassword = await bcrypt.hash(password, saltRounds, function (error, hash) {
         if (error) {
-            res.json(
+            return res.json(
                 new HashingError('Error in saving passsword. Try to enter password again. Remember that most special characters are not allowed and other character encodings are not allowed.',
                     'Register Page')
             )
         }
         return hash
-    });
+    }).catch(err => console.log('Hashing error: ' + err))
     res.locals.registerUser.hashedPassword = hashedPassword;
     next()
 }
@@ -51,12 +51,12 @@ exports.saveUser = async (req, res, next) => {
                 new DatabaseError('Error in trying to save username to database. Try again in 5 mintues.', 'Register Page')
             );
         }
-        res.status(201).json({
-            'message': 'New User was created !',
+        return res.status(201).json({
+            'message': 'Successfully registered as new user!',
             'result': result
         });
     }).catch(err => {
-        res.status(500).json({
+        return res.status(500).json({
             'error': err
         })
     })

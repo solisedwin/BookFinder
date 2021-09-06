@@ -1,13 +1,15 @@
 import axios from 'axios'
 import React from 'react';
 import { ErrorMessage, Formik, Form, Field } from 'formik';
-import { DevURL } from './../../../Constants'
+import { DEVURL } from './../../../Constants'
 import './../../../styles/Home/forms.css'
 import { VStack, Button } from "@chakra-ui/react"
-import TextError from './../../../Containers/TextError
+import TextError from './../../../Containers/TextError'
 import SuccessMessage from './../../../Containers/SuccessMessage'
+import { Redirect } from 'react-router-dom';
 
 import * as Yup from 'yup';
+import Login from './Login';
 
 require('dotenv').config(
     {
@@ -21,6 +23,7 @@ interface IRegisterUser {
     passwordConfirmation: string
 }
 
+
 const Register = () => {
     const initialValues = {
         username: "",
@@ -29,15 +32,21 @@ const Register = () => {
     }
 
     const submitRegistrationForm = (registerUserForm: IRegisterUser) => {
-        alert('Alert ! We submitted the registeration form ! ' + JSON.stringify(registerUserForm))
-        axios.post(`${DevURL}/register`, registerUserForm)
+        axios.post(`${DEVURL}/register`, registerUserForm)
             .then(res => {
-                //User was succesfully created in the database. 
+                //User was succesfully created in the database. Redirected to login page. 
+                console.log(' Server response ----------------------')
                 console.log(res);
-                <SuccessMessage title='Successfully registered as new user!' message={res.message} />
+
+                <Redirect to={{
+                    pathname: '/login',
+                    state: { isRegistered: true }
+                }}
+                />
+                // <SuccessMessage message={res.message} />
             })
             .catch(error => {
-                console.log('Registeration form values: ' + JSON.stringify(error))
+                console.log("Couldn't register new user. Error: " + JSON.stringify(error))
             })
     }
 
@@ -86,6 +95,7 @@ const Register = () => {
     });
 
     return (
+
         <Formik
             initialValues={initialValues}
             validationSchema={registertionFormSchema}
