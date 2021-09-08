@@ -1,21 +1,23 @@
 
 //import { Request, Response, NextFunction } from 'express';
-import DatabaseError from './../Errors/CustomErrorHandling.mjs'
-import HashingError from './../Errors/CustomErrorHandling.mjs'
+const DatabaseError = require('./../Errors/CustomErrorHandling.cjs');
+const HashingError = require('./../Errors/CustomErrorHandling.cjs');
 const bcrypt = require('bcrypt');
-const User = require('./../models/user.model.ts')
+const User = require('./../models/user.model.ts');
 
 exports.isUsernameTaken = async (req, res, next) => {
     const username = req.body.username
 
     User.findOne({ 'username': username })
-        .then(data => {
+        .then(result => {
             if (data === null || data.length > 0) {
                 return res.json(
                     new DatabaseError('Username already exists for another account. Choose a differnt username.', 'Register Page')
                 )
             }
-        }).catch(err => console.log(`Check similar username process failed. Error:  ' + ${err}`))
+            return result
+        })
+        .catch(err => console.log(`Check similar username process failed. Error:  ' + ${err}`))
 
     let registerUser = { 'username': username }
     res.locals.registerUser = registerUser;
@@ -24,7 +26,6 @@ exports.isUsernameTaken = async (req, res, next) => {
 
 
 exports.hashPassword = async (req, res, next) => {
-
     const password = req.body.password
     const saltRounds = 10
 
@@ -55,11 +56,12 @@ exports.saveUser = async (req, res, next) => {
             'message': 'Successfully registered as new user!',
             'result': result
         });
-    }).catch(err => {
-        return res.status(500).json({
-            'error': err
-        })
     })
+        .catch(err => {
+            return res.status(500).json({
+                'error': err
+            })
+        })
 
 
 }

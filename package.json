@@ -2,9 +2,9 @@
   "name": "job-tracker",
   "author": "Edwin Solis",
   "version": "0.1.0",
-  "module": "commonjs",
+  "type": "module",
   "engines": {
-    "node": "14.1.0"
+    "node": "16.9.0"
   },
   "private": true,
   "dependencies": {
