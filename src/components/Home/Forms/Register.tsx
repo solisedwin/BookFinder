@@ -9,13 +9,6 @@ import SuccessMessage from './../../../Containers/SuccessMessage'
 import { Redirect } from 'react-router-dom';
 
 import * as Yup from 'yup';
-import Login from './Login';
-
-require('dotenv').config(
-    {
-        path: `${__dirname}/../.env`
-    }
-)
 
 interface IRegisterUser {
     username: string,
@@ -32,10 +25,11 @@ const Register = () => {
     }
 
     const submitRegistrationForm = (registerUserForm: IRegisterUser) => {
-        axios.post(`${DEVURL}/register`, registerUserForm)
+
+        axios.post(`http://${DEVURL}/register`, registerUserForm)
             .then(res => {
                 //User was succesfully created in the database. Redirected to login page. 
-                console.log(' Server response ----------------------')
+                console.log('Server response after registering a new user')
                 console.log(res);
 
                 <Redirect to={{

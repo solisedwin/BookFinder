@@ -10,17 +10,17 @@ exports.isUsernameTaken = async (req, res, next) => {
 
     User.findOne({ 'username': username })
         .then(result => {
-            if (data === null || data.length > 0) {
+            if (result === null || result.length > 0) {
                 return res.json(
-                    new DatabaseError('Username already exists for another account. Choose a differnt username.', 'Register Page')
+                    new DatabaseError('Username already exists for another account. Choose a differnt username.', 'Register Page').sendError()
                 )
             }
             return result
         })
         .catch(err => console.log(`Check similar username process failed. Error:  ' + ${err}`))
 
-    let registerUser = { 'username': username }
-    res.locals.registerUser = registerUser;
+    let registerUserForm = { 'username': username }
+    res.locals.registerUserForm = registerUserForm;
     next();
 }
 
@@ -33,24 +33,24 @@ exports.hashPassword = async (req, res, next) => {
         if (error) {
             return res.json(
                 new HashingError('Error in saving passsword. Try to enter password again. Remember that most special characters are not allowed and other character encodings are not allowed.',
-                    'Register Page')
+                    'Register Page').sendError()
             )
         }
         return hash
-    }).catch(err => console.log('Hashing error: ' + err))
-    res.locals.registerUser.hashedPassword = hashedPassword;
+    })
+    res.locals.registerUserForm.hashedPassword = hashedPassword;
     next()
 }
 
 exports.saveUser = async (req, res, next) => {
-    const registerUser = res.locals.registerUser;
-    const newUser = User(registerUser);
+    const registerUserForm = res.locals.registerUserForm;
+    const newUser = User(registerUserForm);
 
     await newUser.save().then(result => {
         if (!result) {
             return res.json(
-                new DatabaseError('Error in trying to save username to database. Try again in 5 mintues.', 'Register Page')
-            );
+                new DatabaseError('Error in trying to save username to database. Try again in 5 mintues.', 'Register Page').sendError()
+            )
         }
         return res.status(201).json({
             'message': 'Successfully registered as new user!',
@@ -62,6 +62,4 @@ exports.saveUser = async (req, res, next) => {
                 'error': err
             })
         })
-
-
 }

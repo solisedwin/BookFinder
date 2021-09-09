@@ -9,8 +9,6 @@ require('dotenv').config(
   }
 )
 
-router.post('/', function (req, res) {
-  res.send('<h2>Register function with just slash</h2>')
-})
+router.post('/', UserController.isUsernameTaken, UserController.hashPassword, UserController.saveUser);
 
 module.exports = router;

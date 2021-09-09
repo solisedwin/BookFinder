@@ -3,7 +3,6 @@ class BaseError extends Error {
         super(message)
         this.errorLocation = errorLocation;
         this.httpStatusCode = httpStatusCode;
-        sendError();
     }
 
     sendError() {
