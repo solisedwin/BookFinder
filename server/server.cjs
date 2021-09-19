@@ -6,6 +6,9 @@ const cors = require('cors')
 const path = require('path')
 const app = express();
 
+const { UserFacingError } = require('./error')
+
+
 require('dotenv').config(
   {
     path: '.env.db'
@@ -31,6 +34,19 @@ app.use(express.static(path.join(__dirname, 'dist')))
 const registerRouter = require('./routes/register.ts')
 
 app.use('/register', registerRouter)
+
+//Global Express Error Controller
+app.use(function (err, req, res, next) {
+  if (err instanceof UserFacingError) {
+    res.status(err.statusCode).send(err.message)
+  } else {
+    res.sendStatus(500)
+  }
+
+  //  logger.error(err, 'Parameters: ', req.params, 'User data: ', req.user)
+});
+
+
 
 app.set('port', process.env.PORT || 3001)
 app.listen(app.get('port'), () => {

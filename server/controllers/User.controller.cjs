@@ -1,18 +1,17 @@
 
 //import { Request, Response, NextFunction } from 'express';
-const DatabaseError = require('./../Errors/CustomErrorHandling.cjs');
-const HashingError = require('./../Errors/CustomErrorHandling.cjs');
+const { NotFoundError } = require('./../errors/UserFacingErrors')
 const bcrypt = require('bcrypt');
 const User = require('./../models/user.model.ts');
 
 exports.isUsernameTaken = async (req, res, next) => {
     const username = req.body.username
 
-    User.findOne({ 'username': username })
+    await User.findOne({ 'username': username })
         .then(result => {
-            if (result === null || result.length > 0) {
+            if (result === null || result.length < 0) {
                 return res.json(
-                    new DatabaseError('Username already exists for another account. Choose a differnt username.', 'Register Page').sendError()
+                    new DatabaseError('Username already exists for another account. Choose a differnt username.', 'Register Page').s()
                 )
             }
             return result

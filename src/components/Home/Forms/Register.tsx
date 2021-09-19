@@ -28,9 +28,10 @@ const Register = () => {
 
         axios.post(`http://${DEVURL}/register`, registerUserForm)
             .then(res => {
+                console.log('Response: ' + res)
+
                 //User was succesfully created in the database. Redirected to login page. 
-                console.log('Server response after registering a new user')
-                console.log(res);
+                console.log('Server response after registering a new user');
 
                 <Redirect to={{
                     pathname: '/login',
