@@ -8,7 +8,7 @@ class MalformedData extends DatabaseError {
         }
     }
     get statusCode() {
-        return 500;
+        return 400;
     }
 }
 

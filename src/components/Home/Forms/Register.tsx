@@ -5,7 +5,8 @@ import { DEVURL } from './../../../Constants'
 import './../../../styles/Home/forms.css'
 import { VStack, Button } from "@chakra-ui/react"
 import TextError from './../../../Containers/TextError'
-import SuccessMessage from './../../../Containers/SuccessMessage'
+import SuccessAlert from './../../../Containers/SuccessAlert'
+import ErrorAlert from './../../../Containers/ErrorAlert'
 import { Redirect } from 'react-router-dom';
 
 import * as Yup from 'yup';
@@ -29,6 +30,9 @@ const Register = () => {
         axios.post(`http://${DEVURL}/register`, registerUserForm)
             .then(res => {
                 console.log('Response: ' + res)
+                if (res.status !== 201) {
+                    <ErrorAlert message=res.message />
+                }
 
                 //User was succesfully created in the database. Redirected to login page. 
                 console.log('Server response after registering a new user');
@@ -45,20 +49,10 @@ const Register = () => {
             })
     }
 
-
     const lowercaseRegex = new RegExp('[a-z]');
     const uppercaseRegex = new RegExp('[A-Z]');
     const numericRegex = new RegExp('\\d');
     const noSpacesRegex = new RegExp('^\\S');
-
-
-    /*
-    const characterValidation = (formValue: string) => {
-        //The negation of all characters that are allowed
-        const charactersNotAllowed = new RegExp('[^a-zA-Z0-9!_@]')
-        return !charactersNotAllowed.test(formValue)
-    }
-    */
 
     const registertionFormSchema = Yup.object({
         username: Yup.string()
