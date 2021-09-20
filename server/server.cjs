@@ -6,8 +6,8 @@ const cors = require('cors')
 const path = require('path')
 const app = express();
 
-const { UserFacingError } = require('./error')
-
+const { UserFacingError } = require('./errors/UserFacingErrors')
+const logger = require('./logger/logger')
 
 require('dotenv').config(
   {
@@ -42,11 +42,11 @@ app.use(function (err, req, res, next) {
   } else {
     res.sendStatus(500)
   }
-
-  //  logger.error(err, 'Parameters: ', req.params, 'User data: ', req.user)
+  logger.error(err, {
+    'Request: ': req,
+    'Response: ': res
+  })
 });
-
-
 
 app.set('port', process.env.PORT || 3001)
 app.listen(app.get('port'), () => {

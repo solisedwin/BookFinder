@@ -31,7 +31,7 @@ const Register = () => {
             .then(res => {
                 console.log('Response: ' + res)
                 if (res.status !== 201) {
-                    <ErrorAlert message=res.message />
+                    <ErrorAlert message={res.data} />
                 }
 
                 //User was succesfully created in the database. Redirected to login page. 

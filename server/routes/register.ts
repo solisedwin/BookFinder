@@ -11,4 +11,5 @@ require('dotenv').config(
 
 router.post('/', UserController.isUsernameTaken, UserController.hashPassword, UserController.saveUser);
 
+
 module.exports = router;
