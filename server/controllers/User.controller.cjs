@@ -38,7 +38,7 @@ exports.hashPassword = async (req, res, next) => {
 
 exports.saveUser = async (req, res, next) => {
     const registerUserForm = res.locals.registerUserForm;
-    // --------  Check if exact property names and fiels mathch model. Does it work ? 
+    // --------  Check if exact property names and files mathch model. Does it work ? 
     const registerUser = User(registerUserForm);
     try {
         const createdUser = await registerUser.save();

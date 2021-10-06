@@ -33,4 +33,4 @@ package-lock.json
 .vscode/
 postcss.config.js
 src/react-app-env.d.ts
-
+.env

@@ -4,6 +4,7 @@ import {
     AlertIcon,
     AlertTitle,
     AlertDescription,
+    CloseButton,
 } from "@chakra-ui/react"
 
 function ErrorAlert({ message }) {

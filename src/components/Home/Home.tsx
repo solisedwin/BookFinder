@@ -1,4 +1,3 @@
-import React from 'react'
 import FormBox from './FormBox'
 import { Container } from "@chakra-ui/react"
 import './../../styles/Home/home.css'

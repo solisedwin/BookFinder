@@ -1,13 +1,13 @@
-import axios from 'axios'
 import React from 'react';
+import axios from 'axios'
 import { ErrorMessage, Formik, Form, Field } from 'formik';
-import { DEVURL } from './../../../Constants'
+import { DEVURL } from './../../../Constants';
 import './../../../styles/Home/forms.css'
 import { VStack, Button } from "@chakra-ui/react"
 import TextError from './../../../Containers/TextError'
 import SuccessAlert from './../../../Containers/SuccessAlert'
 import ErrorAlert from './../../../Containers/ErrorAlert'
-import { Redirect } from 'react-router-dom';
+
 
 import * as Yup from 'yup';
 
@@ -37,11 +37,13 @@ const Register = () => {
                 //User was succesfully created in the database. Redirected to login page. 
                 console.log('Server response after registering a new user');
 
+                /*
                 <Redirect to={{
                     pathname: '/login',
                     state: { isRegistered: true }
                 }}
                 />
+                */
                 // <SuccessMessage message={res.message} />
             })
             .catch(error => {

@@ -25,6 +25,8 @@
     "../server/*",
     "../server/controllers/*.ts",
     "../server/routes/*.ts",
+    "./src/*.js",
+    "./src/**/*.js",
     "./src/**/*.ts",
     "./src/**/*.tsx",
     "./src/server/models/*.ts",
