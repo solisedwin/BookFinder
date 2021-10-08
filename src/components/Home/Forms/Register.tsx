@@ -7,7 +7,7 @@ import { VStack, Button } from "@chakra-ui/react"
 import TextError from './../../../Containers/TextError'
 import SuccessAlert from './../../../Containers/SuccessAlert'
 import ErrorAlert from './../../../Containers/ErrorAlert'
-
+import { Redirect } from "react-router-dom";
 
 import * as Yup from 'yup';
 
@@ -34,16 +34,15 @@ const Register = () => {
                     <ErrorAlert message={res.data} />
                 }
 
-                //User was succesfully created in the database. Redirected to login page. 
+                //User was succesfully created in the database. Redirected to login page to sign up with new username & password
                 console.log('Server response after registering a new user');
 
-                /*
                 <Redirect to={{
                     pathname: '/login',
                     state: { isRegistered: true }
                 }}
                 />
-                */
+
                 // <SuccessMessage message={res.message} />
             })
             .catch(error => {
