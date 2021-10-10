@@ -1,7 +1,6 @@
-import React from 'react';
-import axios from 'axios'
 import { ErrorMessage, Formik, Form, Field } from 'formik';
 import { DEVURL } from './../../../Constants';
+import devAxios from './../../../interceptors/DevRequest'
 import './../../../styles/Home/forms.css'
 import { VStack, Button } from "@chakra-ui/react"
 import TextError from './../../../Containers/TextError'
@@ -17,7 +16,6 @@ interface IRegisterUser {
     passwordConfirmation: string
 }
 
-
 const Register = () => {
     const initialValues = {
         username: "",
@@ -27,7 +25,8 @@ const Register = () => {
 
     const submitRegistrationForm = (registerUserForm: IRegisterUser) => {
 
-        axios.post(`http://${DEVURL}/register`, registerUserForm)
+        devAxios
+            .post(`http://${DEVURL}/register`, registerUserForm)
             .then(res => {
                 console.log('Response: ' + res)
                 if (res.status !== 201) {

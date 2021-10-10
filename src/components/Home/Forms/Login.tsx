@@ -1,7 +1,7 @@
 
-const Login = (props) => {
+const Login = (props: any) => {
     console.log('-- Inside Login compenent from Register')
-    console.log('*** ' + this.props.location.state.isRegistered + ' ***');
+    console.log('*** ' + props.location.state.isRegistered + ' ***');
     return (
         <div>
             Login component;

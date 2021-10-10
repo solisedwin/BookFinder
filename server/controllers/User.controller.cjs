@@ -9,14 +9,14 @@ exports.isUsernameTaken = async (req, res, next) => {
     const username = req.body.username
     try {
         const userData = await User.findOne({ 'username': username })
+    if (userData !== null || userData.length > 0) {
+        return next(new DuplicateData('Username already exists. Please choose a different one'))
+    }
     }
     catch (error) {
         return next(error)
     }
 
-    if (userData !== null || userData.length > 0) {
-        return next(new DuplicateData('Username already exists. Please choose a different one'))
-    }
 
     let registerUserForm = { 'username': username }
     res.locals.registerUserForm = registerUserForm;
