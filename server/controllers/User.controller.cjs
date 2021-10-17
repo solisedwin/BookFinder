@@ -9,7 +9,7 @@ exports.isUsernameTaken = async (req, res, next) => {
     const username = req.body.username
     try {
         const userData = await User.findOne({ 'username': username })
-    if (userData !== null || userData.length > 0) {
+    if (userData !== null) {
         return next(new DuplicateData('Username already exists. Please choose a different one'))
     }
     }
@@ -29,10 +29,10 @@ exports.hashPassword = async (req, res, next) => {
     const saltRounds = 10
     try {
         const hashedPassword = await bcrypt.hash(password, saltRounds);
+        res.locals.registerUserForm.password = hashedPassword;
     } catch (error) {
         return next(error);
     }
-    res.locals.registerUserForm.hashedPassword = hashedPassword;
     next()
 }
 
@@ -47,7 +47,7 @@ exports.saveUser = async (req, res, next) => {
     }
     return res.status(201).json({
         'message': 'Successfully registered as a new user!',
-        'result': result
+        'result': res
     });
 }
 

@@ -1,5 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
-//import { Request, Response } from 'express';
+import axios from 'axios';
 const logger = require('logger');
 
 const devAxios = axios.create({

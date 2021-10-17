@@ -1,6 +1,7 @@
+import axios from 'axios';
 import { ErrorMessage, Formik, Form, Field } from 'formik';
 import { DEVURL } from './../../../Constants';
-import devAxios from './../../../interceptors/DevRequest'
+//import devAxios from './../../../interceptors/DevRequest'
 import './../../../styles/Home/forms.css'
 import { VStack, Button } from "@chakra-ui/react"
 import TextError from './../../../Containers/TextError'
@@ -25,7 +26,7 @@ const Register = () => {
 
     const submitRegistrationForm = (registerUserForm: IRegisterUser) => {
 
-        devAxios
+        axios
             .post(`http://${DEVURL}/register`, registerUserForm)
             .then(res => {
                 console.log('Response: ' + res)
