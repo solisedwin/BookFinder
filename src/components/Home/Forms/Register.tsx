@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { ErrorMessage, Formik, Form, Field } from 'formik';
 import { DEVURL } from './../../../Constants';
-//import devAxios from './../../../interceptors/DevRequest'
 import './../../../styles/Home/forms.css'
 import { VStack, Button } from "@chakra-ui/react"
 import TextError from './../../../Containers/TextError'

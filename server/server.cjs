@@ -47,7 +47,6 @@ app.use(function (err, req, res, next) {
 
   if (err) {
     logger.error(err);
-    //logger.error(`${req.method} - ${err.message}  - ${req.originalUrl} - ${req.ip}`);
   } else {
     logger.info(`${req.method} -  ${req.originalUrl} - ${req.ip}`);
   }
