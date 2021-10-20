@@ -43,7 +43,6 @@ exports.saveUser = async (req, res, next) => {
     }
     return res.status(201).json({
         'message': 'Successfully registered as a new user!',
-        'result': res
     });
 }
 
