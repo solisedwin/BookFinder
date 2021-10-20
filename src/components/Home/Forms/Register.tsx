@@ -45,7 +45,7 @@ const Register = () => {
                 // <SuccessMessage message={res.message} />
             })
             .catch(error => {
-                console.log("Couldn't register new user. Error: " + JSON.stringify(error))
+                console.log("Couldn't register new user. Error: " + error)
             })
     }
 

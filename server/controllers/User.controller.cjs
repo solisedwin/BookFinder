@@ -1,7 +1,5 @@
 
-//import { Request, Response, NextFunction } from 'express';
 const { DuplicateData } = require('./../errors/UserFacingErrors')
-
 const bcrypt = require('bcrypt');
 const User = require('./../models/user.model.ts');
 
@@ -9,14 +7,13 @@ exports.isUsernameTaken = async (req, res, next) => {
     const username = req.body.username
     try {
         const userData = await User.findOne({ 'username': username })
-    if (userData !== null) {
-        return next(new DuplicateData('Username already exists. Please choose a different one'))
-    }
+        if (userData !== null) {
+            return next(new DuplicateData('Username already exists. Please choose a different one'))
+        }
     }
     catch (error) {
         return next(error)
     }
-
 
     let registerUserForm = { 'username': username }
     res.locals.registerUserForm = registerUserForm;
@@ -38,7 +35,6 @@ exports.hashPassword = async (req, res, next) => {
 
 exports.saveUser = async (req, res, next) => {
     const registerUserForm = res.locals.registerUserForm;
-    // --------  Check if exact property names and files mathch model. Does it work ? 
     const registerUser = User(registerUserForm);
     try {
         const createdUser = await registerUser.save();

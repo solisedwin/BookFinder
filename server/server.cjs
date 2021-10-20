@@ -46,11 +46,12 @@ app.use(function (err, req, res, next) {
   }
 
   if (err) {
-    logger.error(err);
+    logger.error(err.stack);
+    next(err)
   } else {
     logger.info(`${req.method} -  ${req.originalUrl} - ${req.ip}`);
+    next()
   }
-  next(err)
 })
 
 app.listen(app.get('port'), () => {
