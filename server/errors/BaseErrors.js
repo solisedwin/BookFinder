@@ -2,14 +2,23 @@ class ApplicationError extends Error {
     constructor() {
         super();
     }
-    name() {
+    get name() {
         return this.constructor.name;
     }
 }
-class DatabaseError extends ApplicationError { }
-class UserFacingError extends ApplicationError {}
+class DatabaseError extends ApplicationError {
+    get statusCode() {
+        return 500;
+    }
+}
+class UserFacingError extends ApplicationError {
+    get statusCode() {
+        return 400;
+    }
+}
 
 module.exports = {
     DatabaseError,
-    UserFacingError
+    UserFacingError,
+    ApplicationError
 }

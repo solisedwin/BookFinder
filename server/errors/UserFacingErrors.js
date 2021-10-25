@@ -7,9 +7,6 @@ class BadRequestError extends UserFacingError {
             this[key] = value;
         }
     }
-    get statusCode() {
-        return 400;
-    }
 }
 
 
@@ -20,9 +17,6 @@ class NotFoundError extends UserFacingError {
             this[key] = value;
         }
     }
-    get statusCode() {
-        return 404
-    }
 }
 
 class DuplicateData extends UserFacingError {
@@ -31,9 +25,6 @@ class DuplicateData extends UserFacingError {
         for (const [key, value] of Object.entries(options)) {
             this[key] = value;
         }
-    }
-    get statusCode() {
-        return 400
     }
 }
 

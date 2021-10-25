@@ -8,7 +8,6 @@ const cors = require('cors')
 const path = require('path')
 const app = express();
 
-const { UserFacingError } = require('./errors/BaseErrors')
 const logger = require('./logger/logger')
 
 require('dotenv').config(
@@ -37,7 +36,6 @@ const registerRouter = require('./routes/register.ts')
 
 app.use('/register', registerRouter)
 app.set('port', process.env.PORT || 3001)
-
 //Global HTTP Request and Response. And Logging. 
 app.use(function (err, req, res, next) {
   //Set Allow Origin for development on localhost. 
@@ -46,10 +44,11 @@ app.use(function (err, req, res, next) {
   }
 
   if (err) {
-    logger.error(err.stack);
-    next(err)
-  } else {
-    logger.info(`${req.method} -  ${req.originalUrl} - ${req.ip}`);
+    logger.error(err.stack)
+    return res.status(err.statusCode).json({
+      errorName: err.name,
+      message: err.message
+    })
     next()
   }
 })

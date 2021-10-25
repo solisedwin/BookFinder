@@ -6,7 +6,7 @@ const User = require('./../models/user.model.ts');
 exports.isUsernameTaken = async (req, res, next) => {
     const username = req.body.username
     try {
-        const userData = await User.findOne({ 'username': username })
+        const userData = await User.findOne({ 'username': username }).exec();
         if (userData !== null) {
             return next(new DuplicateData('Username already exists. Please choose a different one'))
         }
@@ -42,7 +42,7 @@ exports.saveUser = async (req, res, next) => {
         return next(error);
     }
     return res.status(201).json({
-        'message': 'Successfully registered as a new user!',
+        'message': 'Successfully registered as a new user!'
     });
 }
 

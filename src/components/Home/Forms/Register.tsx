@@ -28,24 +28,24 @@ const Register = () => {
         axios
             .post(`http://${DEVURL}/register`, registerUserForm)
             .then(res => {
-                console.log('Response: ' + res)
+                console.log('******* Response: ' + res)
                 if (res.status !== 201) {
-                    <ErrorAlert message={res.data} />
+                    console.log('Not a 201 status code ! Error has occured. Will display error on the screen.');
+                    <ErrorAlert message={res.data.message} />
+                } else {
+                    console.log('Server response after registering a new user');
+
+                    <Redirect to={{
+                        pathname: '/login',
+                        state: { isRegistered: true }
+                    }}
+                    />
+
                 }
-
-                //User was succesfully created in the database. Redirected to login page to sign up with new username & password
-                console.log('Server response after registering a new user');
-
-                <Redirect to={{
-                    pathname: '/login',
-                    state: { isRegistered: true }
-                }}
-                />
-
                 // <SuccessMessage message={res.message} />
             })
             .catch(error => {
-                console.log("Couldn't register new user. Error: " + error)
+                console.log("Couldn't register new user. " + JSON.stringify(error.response))
             })
     }
 
