@@ -2,11 +2,11 @@ import React from 'react'
 import {
     Alert,
     AlertIcon,
-    AlertTitle,
     AlertDescription,
+    CloseButton
 } from "@chakra-ui/react"
 
-function SuccessMessage({message}) {
+function SuccessMessage({ message }) {
     return (
         <Alert status="success">
             <AlertIcon />

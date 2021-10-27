@@ -7,6 +7,7 @@ import TextError from './../../../Containers/TextError'
 import SuccessAlert from './../../../Containers/SuccessAlert'
 import ErrorAlert from './../../../Containers/ErrorAlert'
 import { Redirect } from "react-router-dom";
+import { useState } from 'react';
 
 import * as Yup from 'yup';
 
@@ -17,35 +18,42 @@ interface IRegisterUser {
 }
 
 const Register = () => {
+
+    const [userCreated, setUserCreated] = useState({
+        status: false,
+        message: ''
+    })
+
     const initialValues = {
         username: "",
         password: "",
         passwordConfirmation: "",
     }
+    /*
+    <Redirect to={{
+        pathname: '/login',
+        state: { isRegistered: true }
+    }}*/
+
 
     const submitRegistrationForm = (registerUserForm: IRegisterUser) => {
-
         axios
             .post(`http://${DEVURL}/register`, registerUserForm)
             .then(res => {
-                console.log('******* Response: ' + res)
-                if (res.status !== 201) {
-                    console.log('Not a 201 status code ! Error has occured. Will display error on the screen.');
-                    <ErrorAlert message={res.data.message} />
-                } else {
-                    console.log('Server response after registering a new user');
-
-                    <Redirect to={{
-                        pathname: '/login',
-                        state: { isRegistered: true }
-                    }}
-                    />
-
+                if (res.status === 201) {
+                    setUserCreated(
+                        {
+                            status: true,
+                            message: res.data.message
+                        })
                 }
-                // <SuccessMessage message={res.message} />
             })
             .catch(error => {
-                console.log("Couldn't register new user. " + JSON.stringify(error.response))
+                setUserCreated(
+                    {
+                        status: false,
+                        message: error.message
+                    })
             })
     }
 
@@ -84,56 +92,60 @@ const Register = () => {
     });
 
     return (
+        <>
+            {userCreated.status ? <SuccessAlert message={userCreated.message} /> : <ErrorAlert message={userCreated.message} />}
 
-        <Formik
-            initialValues={initialValues}
-            validationSchema={registertionFormSchema}
-            onSubmit={submitRegistrationForm}
-        >
-            {
-                formik => {
-                    return (
-                        <Form>
+            <Formik
+                initialValues={initialValues}
+                validationSchema={registertionFormSchema}
+                onSubmit={submitRegistrationForm}
+            >
+                {
+                    formik => {
+                        return (
+                            <Form>
 
-                            <VStack
-                                spacing={35}
-                                align='stretch'
-                                mt={10}
-                            >
-                                <Field
-                                    type='text'
-                                    id='username'
-                                    name='username'
-                                    className='formik-field'
-                                    placeholder='Username'
-                                />
-                                <ErrorMessage name='username' component={TextError} />
+                                <VStack
+                                    spacing={35}
+                                    align='stretch'
+                                    mt={10}
+                                >
+                                    <Field
+                                        type='text'
+                                        id='username'
+                                        name='username'
+                                        className='formik-field'
+                                        placeholder='Username'
+                                    />
+                                    <ErrorMessage name='username' component={TextError} />
 
-                                <Field
-                                    type='password'
-                                    id='password'
-                                    name='password'
-                                    className='formik-field'
-                                    placeholder='Password'
-                                />
-                                <ErrorMessage name='password' component={TextError} />
+                                    <Field
+                                        type='password'
+                                        id='password'
+                                        name='password'
+                                        className='formik-field'
+                                        placeholder='Password'
+                                    />
+                                    <ErrorMessage name='password' component={TextError} />
 
-                                <Field
-                                    type='password'
-                                    id='passwordConfirmation'
-                                    name='passwordConfirmation'
-                                    className='formik-field'
-                                    placeholder='Re Enter Password'
-                                />
-                                <ErrorMessage name='passwordConfirmation' component={TextError} />
+                                    <Field
+                                        type='password'
+                                        id='passwordConfirmation'
+                                        name='passwordConfirmation'
+                                        className='formik-field'
+                                        placeholder='Re Enter Password'
+                                    />
+                                    <ErrorMessage name='passwordConfirmation' component={TextError} />
 
-                                <Button colorScheme="green" type='submit' fontSize='larger'>Register</Button>
-                            </VStack>
-                        </Form>
-                    )
+                                    <Button colorScheme="green" type='submit' fontSize='larger'>Register</Button>
+                                </VStack>
+                            </Form>
+                        )
+                    }
+
                 }
-            }
-        </Formik >
+            </Formik>
+        </>
     );
 }
 
