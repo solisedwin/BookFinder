@@ -4,8 +4,7 @@ import { DEVURL } from './../../../Constants';
 import './../../../styles/Home/forms.css'
 import { VStack, Button } from "@chakra-ui/react"
 import TextError from './../../../Containers/TextError'
-import SuccessAlert from './../../../Containers/SuccessAlert'
-import ErrorAlert from './../../../Containers/ErrorAlert'
+import CustomAlert from './../../../Containers/CustomAlert'
 import { Redirect } from "react-router-dom";
 import { useState } from 'react';
 
@@ -20,7 +19,8 @@ interface IRegisterUser {
 const Register = () => {
 
     const [userCreated, setUserCreated] = useState({
-        status: false,
+        isCreated: false,
+        status: '',
         message: ''
     })
 
@@ -43,7 +43,8 @@ const Register = () => {
                 if (res.status === 201) {
                     setUserCreated(
                         {
-                            status: true,
+                            isCreated: true,
+                            status: 'success',
                             message: res.data.message
                         })
                 }
@@ -51,7 +52,8 @@ const Register = () => {
             .catch(error => {
                 setUserCreated(
                     {
-                        status: false,
+                        isCreated: false,
+                        status: 'error',
                         message: error.message
                     })
             })
@@ -93,7 +95,7 @@ const Register = () => {
 
     return (
         <>
-            {userCreated.status ? <SuccessAlert message={userCreated.message} /> : <ErrorAlert message={userCreated.message} />}
+            {userCreated.isCreated && <CustomAlert alertStatus={userCreated.status} message={userCreated.message} />}
 
             <Formik
                 initialValues={initialValues}
