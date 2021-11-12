@@ -42,15 +42,16 @@ app.use(function (err, req, res, next) {
   if (process.env.NODE_ENV === "development") {
     req.headers['Access-Control-Allow-Origin'] = 'http://localhost:300'
   }
-
-  if (err) {
-    logger.error(err.stack)
-    return res.status(err.statusCode).json({
-      errorName: err.name,
-      message: err.message
-    })
-    next()
-  }
+  next()
+  /*
+    if (err) {
+      logger.error(err.stack)
+      return res.status(err.statusCode).json({
+        errorName: err.name,
+        message: err.message
+      })
+    }
+  */
 })
 
 app.listen(app.get('port'), () => {

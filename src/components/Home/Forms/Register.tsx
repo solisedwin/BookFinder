@@ -18,6 +18,8 @@ interface IRegisterUser {
 
 const Register = () => {
 
+    const [registerUserAttempt, setregisterUserAttempt] = useState(false);
+
     const [userCreated, setUserCreated] = useState({
         isCreated: false,
         status: '',
@@ -48,14 +50,19 @@ const Register = () => {
                             message: res.data.message
                         })
                 }
+
             })
             .catch(error => {
+                console.log(error.response);
                 setUserCreated(
                     {
                         isCreated: false,
                         status: 'error',
                         message: error.message
                     })
+
+            }).finally(() => {
+                setregisterUserAttempt(true);
             })
     }
 
@@ -95,7 +102,7 @@ const Register = () => {
 
     return (
         <>
-            {userCreated.isCreated && <CustomAlert alertStatus={userCreated.status} message={userCreated.message} />}
+            {registerUserAttempt && <CustomAlert alertStatus={userCreated.status} message={userCreated.message} />}
 
             <Formik
                 initialValues={initialValues}

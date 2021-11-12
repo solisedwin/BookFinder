@@ -1,7 +1,4 @@
 class ApplicationError extends Error {
-    constructor() {
-        super();
-    }
     get name() {
         return this.constructor.name;
     }

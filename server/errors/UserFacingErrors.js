@@ -22,6 +22,7 @@ class NotFoundError extends UserFacingError {
 class DuplicateData extends UserFacingError {
     constructor(message, options = {}) {
         super(message);
+        this.message = message;
         for (const [key, value] of Object.entries(options)) {
             this[key] = value;
         }
