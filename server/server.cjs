@@ -36,23 +36,26 @@ const registerRouter = require('./routes/register.ts')
 
 app.use('/register', registerRouter)
 app.set('port', process.env.PORT || 3001)
-//Global HTTP Request and Response. And Logging. 
-app.use(function (err, req, res, next) {
+
+function errorHandler(err, req, res, next) {
+  if (err) {
+    logger.error(err.stack)
+    return res.status(err.statusCode).json({
+      errorName: err.name,
+      message: err.message
+    })
+  }
+}
+
+//Global HTTP Request and Response. Logging and error handling. 
+app.use(function (req, res, next) {
   //Set Allow Origin for development on localhost. 
   if (process.env.NODE_ENV === "development") {
     req.headers['Access-Control-Allow-Origin'] = 'http://localhost:300'
   }
-  next()
-  /*
-    if (err) {
-      logger.error(err.stack)
-      return res.status(err.statusCode).json({
-        errorName: err.name,
-        message: err.message
-      })
-    }
-  */
 })
+
+app.use(errorHandler);
 
 app.listen(app.get('port'), () => {
   console.log(`Server is running on port: ${app.get('port')}`);

@@ -8,7 +8,7 @@ exports.isUsernameTaken = async (req, res, next) => {
     try {
         const userData = await User.findOne({ 'username': username }).exec();
         if (userData !== null) {
-            throw new DuplicateData('Username already exists. Please choose a different one')
+            return next(new DuplicateData('Username already exists. Please choose a different one'))
         }
     }
     catch (error) {

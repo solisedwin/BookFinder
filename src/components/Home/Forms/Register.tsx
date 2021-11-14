@@ -42,27 +42,21 @@ const Register = () => {
         axios
             .post(`http://${DEVURL}/register`, registerUserForm)
             .then(res => {
-                if (res.status === 201) {
+                if (res.status) {
+                    let userRegistrationStatus = (res.status === 201) ? 'success' : 'error';
                     setUserCreated(
                         {
                             isCreated: true,
-                            status: 'success',
+                            status: userRegistrationStatus,
                             message: res.data.message
                         })
                 }
-
             })
-            .catch(error => {
-                console.log(error.response);
-                setUserCreated(
-                    {
-                        isCreated: false,
-                        status: 'error',
-                        message: error.message
-                    })
-
-            }).finally(() => {
-                setregisterUserAttempt(true);
+            .catch(err => {
+                console.log('** ' + err);
+            })
+            .finally(() => {
+                setregisterUserAttempt(registerUserAttempt => !registerUserAttempt);
             })
     }
 
