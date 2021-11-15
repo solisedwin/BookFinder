@@ -42,7 +42,8 @@ exports.saveUser = async (req, res, next) => {
         return next(error);
     }
     return res.status(201).json({
-        'message': 'Successfully registered as a new user!'
+        'message': 'Successfully registered as a new user!',
+        'alertStatus': 'success'
     });
 }
 

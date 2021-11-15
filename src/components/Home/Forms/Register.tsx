@@ -21,7 +21,6 @@ const Register = () => {
     const [registerUserAttempt, setregisterUserAttempt] = useState(false);
 
     const [userCreated, setUserCreated] = useState({
-        isCreated: false,
         status: '',
         message: ''
     })
@@ -42,16 +41,14 @@ const Register = () => {
         axios
             .post(`http://${DEVURL}/register`, registerUserForm)
             .then(res => {
-                if (res.status) {
-                    let userRegistrationStatus = (res.status === 201) ? 'success' : 'error';
-                    setUserCreated(
-                        {
-                            isCreated: true,
-                            status: userRegistrationStatus,
-                            message: res.data.message
-                        })
-                }
-            })
+                //let userRegistrationStatus = (res.status === 201) ? 'success' : 'error';
+                setUserCreated(
+                    {
+                        status: res.data.alertStatus,
+                        message: res.data.message
+                    })
+            }
+            )
             .catch(err => {
                 console.log('** ' + err);
             })

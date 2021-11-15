@@ -41,11 +41,14 @@ function errorHandler(err, req, res, next) {
   if (err) {
     logger.error(err.stack)
     return res.status(err.statusCode).json({
+      alertStatus: 'error',
       errorName: err.name,
       message: err.message
     })
   }
 }
+
+app.use(errorHandler);
 
 //Global HTTP Request and Response. Logging and error handling. 
 app.use(function (req, res, next) {
@@ -55,7 +58,6 @@ app.use(function (req, res, next) {
   }
 })
 
-app.use(errorHandler);
 
 app.listen(app.get('port'), () => {
   console.log(`Server is running on port: ${app.get('port')}`);
