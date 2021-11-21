@@ -6,7 +6,7 @@ import {
     CloseButton
 } from "@chakra-ui/react"
 
-function CustomAlert({ alertStatus, message }) {
+function CustomAlert({ alertStatus = 'info', message = 'default message' }) {
     //Status List: 'error', 'success', 'warning', and 'info'.
     return (
         <Alert status={alertStatus}>

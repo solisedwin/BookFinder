@@ -6,7 +6,7 @@ import { VStack, Button } from "@chakra-ui/react"
 import TextError from './../../../Containers/TextError'
 import CustomAlert from './../../../Containers/CustomAlert'
 import { Redirect } from "react-router-dom";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import * as Yup from 'yup';
 
@@ -18,7 +18,7 @@ interface IRegisterUser {
 
 const Register = () => {
 
-    const [registerUserAttempt, setregisterUserAttempt] = useState(false);
+    const [registerUserAttempt, setregisterAttempt] = useState(false);
 
     const [userCreated, setUserCreated] = useState({
         status: '',
@@ -36,24 +36,29 @@ const Register = () => {
         state: { isRegistered: true }
     }}*/
 
+    //ComponentMount, Update, Unmount
+    useEffect(() => {
+        if (userCreated.status && userCreated.message) {
+            alert('Passed if statement')
+            setregisterAttempt(true);
+        }
+    }, [userCreated])
 
     const submitRegistrationForm = (registerUserForm: IRegisterUser) => {
         axios
             .post(`http://${DEVURL}/register`, registerUserForm)
             .then(res => {
-                //let userRegistrationStatus = (res.status === 201) ? 'success' : 'error';
-                setUserCreated(
-                    {
-                        status: res.data.alertStatus,
-                        message: res.data.message
-                    })
+                setTimeout(() => {
+                    setUserCreated(
+                        {
+                            status: res.data.alertStatus,
+                            message: res.data.message
+                        })
+                }, 3000)
             }
             )
             .catch(err => {
                 console.log('** ' + err);
-            })
-            .finally(() => {
-                setregisterUserAttempt(registerUserAttempt => !registerUserAttempt);
             })
     }
 

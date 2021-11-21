@@ -35,20 +35,20 @@ app.use(morgan("combined", { stream: logger.stream.write }));
 const registerRouter = require('./routes/register.ts')
 
 app.use('/register', registerRouter)
+app.use(errorHandler);
 app.set('port', process.env.PORT || 3001)
 
 function errorHandler(err, req, res, next) {
   if (err) {
     logger.error(err.stack)
     return res.status(err.statusCode).json({
-      alertStatus: 'error',
+      alertStatus: "error",
       errorName: err.name,
       message: err.message
     })
   }
 }
 
-app.use(errorHandler);
 
 //Global HTTP Request and Response. Logging and error handling. 
 app.use(function (req, res, next) {
