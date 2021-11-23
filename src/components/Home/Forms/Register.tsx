@@ -6,7 +6,7 @@ import { VStack, Button } from "@chakra-ui/react"
 import TextError from './../../../Containers/TextError'
 import CustomAlert from './../../../Containers/CustomAlert'
 import { Redirect } from "react-router-dom";
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import * as Yup from 'yup';
 
@@ -25,40 +25,29 @@ const Register = () => {
         message: ''
     })
 
-    const initialValues = {
-        username: "",
-        password: "",
-        passwordConfirmation: "",
-    }
     /*
     <Redirect to={{
         pathname: '/login',
         state: { isRegistered: true }
     }}*/
-
-    //ComponentMount, Update, Unmount
-    useEffect(() => {
-        if (userCreated.status && userCreated.message) {
-            alert('Passed if statement')
-            setregisterAttempt(true);
-        }
-    }, [userCreated])
-
     const submitRegistrationForm = (registerUserForm: IRegisterUser) => {
         axios
             .post(`http://${DEVURL}/register`, registerUserForm)
             .then(res => {
-                setTimeout(() => {
-                    setUserCreated(
-                        {
-                            status: res.data.alertStatus,
-                            message: res.data.message
-                        })
-                }, 3000)
-            }
-            )
+                setUserCreated(
+                    {
+                        status: res.data.alertStatus,
+                        message: res.data.message
+                    })
+            })
             .catch(err => {
-                console.log('** ' + err);
+                setUserCreated(
+                    {
+                        status: err.response.data.alertStatus,
+                        message: err.response.data.message
+                    })
+            }).finally(() => {
+                setregisterAttempt(true);
             })
     }
 
@@ -95,6 +84,12 @@ const Register = () => {
             .oneOf([Yup.ref('password')], 'Password must be the same!')
             .required('Required')
     });
+
+    const initialValues = {
+        username: "",
+        password: "",
+        passwordConfirmation: "",
+    }
 
     return (
         <>
