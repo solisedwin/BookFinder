@@ -8,11 +8,6 @@ import {
 } from "@chakra-ui/react"
 
 function CustomAlert({ alertStatus, message, hideAlert }) {
-
-    const closeAlert = () => {
-        alert('close this button already');
-    }
-
     //alertStatus List: 'error', 'success', 'warning', and 'info'.
     return (
         <Alert status={alertStatus}>

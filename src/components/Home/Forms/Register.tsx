@@ -5,8 +5,8 @@ import './../../../styles/Home/forms.css'
 import { VStack, Button } from "@chakra-ui/react"
 import TextError from './../../../Containers/TextError'
 import CustomAlert from './../../../Containers/CustomAlert'
-import { Redirect } from "react-router-dom";
-import { useState } from 'react';
+import { useHistory } from "react-router-dom";
+import { useState, useEffect } from 'react';
 
 import * as Yup from 'yup';
 
@@ -25,11 +25,21 @@ const Register = () => {
         message: ''
     })
 
-    /*
-    <Redirect to={{
-        pathname: '/login',
-        state: { isRegistered: true }
-    }}*/
+    let history = useHistory();
+
+    useEffect(() => {
+
+        if (userCreated.status === 'success') {
+            history.push({
+                pathname: '/login',
+                state: {
+                    userCreated
+                }
+            })
+        }
+    }, [registerUserAttempt])
+
+
     const submitRegistrationForm = (registerUserForm: IRegisterUser) => {
         axios
             .post(`http://${DEVURL}/register`, registerUserForm)
