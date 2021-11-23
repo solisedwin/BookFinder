@@ -91,9 +91,13 @@ const Register = () => {
         passwordConfirmation: "",
     }
 
+    const hideAlert = () => {
+        setregisterAttempt(false);
+    }
+
     return (
         <>
-            {registerUserAttempt && <CustomAlert alertStatus={userCreated.status} message={userCreated.message} />}
+            {registerUserAttempt && <CustomAlert alertStatus={userCreated.status} message={userCreated.message} hideAlert={hideAlert} />}
 
             <Formik
                 initialValues={initialValues}
