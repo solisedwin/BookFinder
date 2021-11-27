@@ -28,7 +28,7 @@ const Register = () => {
     let history = useHistory();
 
     useEffect(() => {
-
+        //Successfully registered new user, redirect to login page.
         if (userCreated.status === 'success') {
             history.push({
                 pathname: '/login',
@@ -36,7 +36,19 @@ const Register = () => {
                     userCreated
                 }
             })
+
+            return () => {
+                setregisterAttempt(false)
+            }
+
         }
+
+        return () => {
+            setTimeout(() => {
+                setregisterAttempt(false)
+            }, 5000)
+        }
+
     }, [registerUserAttempt])
 
 
