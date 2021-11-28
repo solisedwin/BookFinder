@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Login from './Forms/Login';
 import Register from './Forms/Register';
 import { Box } from "@chakra-ui/react"
 import { Link } from "@chakra-ui/react"
 import { Text } from "@chakra-ui/react"
 
-
-const FormBox = (props:any) => {
+const FormBox = (props) => {
     const [isRegisterForm, setisRegisterForm] = useState(true)
 
     let formView: JSX.Element;
@@ -24,14 +23,22 @@ const FormBox = (props:any) => {
     }
 
     return (
-        <Box mt={200}>
-            {formView}
-            <Link onClick={changeForm} href='#'>
-                <Text fontSize='xl' mt={3} color='azure'>
-                    {formMessage}
-                </Text>
-            </Link>
-        </Box>
+        <>
+            <Text color='#536895' fontWeight='bold' fontFamily=' URW Chancery L cursive' fontSize='5xl' mt={2}>
+                {isRegisterForm ? 'Register' : 'Login'}
+            </Text>
+
+            <Box mt={200}>
+                {formView}
+                <Link onClick={changeForm} >
+                    <Text fontSize='xl' mt={3} color='azure'>
+                        {formMessage}
+                    </Text>
+                </Link>
+            </Box>
+
+        </>
+
     )
 
 };

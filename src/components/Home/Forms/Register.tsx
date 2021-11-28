@@ -10,7 +10,7 @@ import { useState, useEffect } from 'react';
 
 import * as Yup from 'yup';
 
-interface IRegisterUser {
+interface IRegisterForm {
     username: string,
     password: string,
     passwordConfirmation: string
@@ -52,7 +52,7 @@ const Register = () => {
     }, [registerUserAttempt])
 
 
-    const submitRegistrationForm = (registerUserForm: IRegisterUser) => {
+    const submitRegistrationForm = (registerUserForm: IRegisterForm) => {
         axios
             .post(`http://${DEVURL}/register`, registerUserForm)
             .then(res => {

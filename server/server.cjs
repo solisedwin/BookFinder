@@ -33,8 +33,11 @@ app.use(express.static(path.join(__dirname, 'dist')))
 app.use(morgan("combined", { stream: logger.stream.write }));
 
 const registerRouter = require('./routes/register.ts')
+const loginRouter = require('./routes/login.ts')
 
 app.use('/register', registerRouter)
+app.use('/login', loginRouter)
+
 app.use(errorHandler);
 app.set('port', process.env.PORT || 3001)
 
