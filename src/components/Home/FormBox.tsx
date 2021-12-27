@@ -1,15 +1,14 @@
 import { useState } from 'react';
 import Login from './Forms/Login';
 import Register from './Forms/Register';
-import { Box } from "@chakra-ui/react"
-import { Link } from "@chakra-ui/react"
-import { Text } from "@chakra-ui/react"
+import { Box, Link, Text } from "@chakra-ui/react"
 
-const FormBox = (props) => {
+const FormBox = () => {
+
     const [isRegisterForm, setisRegisterForm] = useState(true)
-
     let formView: JSX.Element;
     let formMessage = ""
+
     if (isRegisterForm) {
         formView = <Register />;
         formMessage = "Already have an account? Login";

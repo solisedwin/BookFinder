@@ -5,7 +5,6 @@ import './../../../styles/Home/forms.css'
 import { VStack, Button } from "@chakra-ui/react"
 import TextError from './../../../Containers/TextError'
 import CustomAlert from './../../../Containers/CustomAlert'
-import { useHistory } from "react-router-dom";
 import { useState, useEffect } from 'react';
 
 import * as Yup from 'yup';
@@ -16,7 +15,7 @@ interface IRegisterForm {
     passwordConfirmation: string
 }
 
-const Register = () => {
+const Register = (props) => {
 
     const [registerUserAttempt, setregisterAttempt] = useState(false);
 
@@ -25,29 +24,19 @@ const Register = () => {
         message: ''
     })
 
-    let history = useHistory();
-
     useEffect(() => {
         //Successfully registered new user, redirect to login page.
         if (userCreated.status === 'success') {
-            history.push({
-                pathname: '/login',
-                state: {
-                    userCreated
-                }
-            })
-
-            return () => {
-                setregisterAttempt(false)
-            }
-
+            props.changeParentFormState();
         }
+
 
         return () => {
             setTimeout(() => {
                 setregisterAttempt(false)
-            }, 5000)
+            }, 9000)
         }
+
 
     }, [registerUserAttempt])
 
@@ -119,6 +108,7 @@ const Register = () => {
 
     return (
         <>
+            // ***** Has to be moved to parent component ? Line of code on top level, regardless if it is a login or register page ? Pass setUserCreated object?
             {registerUserAttempt && <CustomAlert alertStatus={userCreated.status} message={userCreated.message} hideAlert={hideAlert} />}
 
             <Formik

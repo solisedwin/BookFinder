@@ -1,13 +1,11 @@
 import React from 'react';
 import Home from './components/Home/Home';
-import Login from './components/Home/Forms/Login';
 import { Route, Switch } from 'react-router-dom';
 
 function App() {
     return (
         <Switch>
             <Route path="/" component={Home} exact />
-            <Route path="/login" component={Login} exact />
         </Switch>
     )
 }
