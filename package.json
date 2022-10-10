@@ -1,9 +1,9 @@
 {
-  "name": "job-tracker",
+  "name": "book-finder",
   "author": "Edwin Solis",
   "version": "0.1.0",
   "engines": {
-    "node": "16.9.0"
+    "node": "^16.9.0"
   },
   "private": true,
   "dependencies": {
@@ -29,6 +29,7 @@
     "logger": "file:./server/logger/logger",
     "mongoose": "^5.13.3",
     "morgan": "^1.10.0",
+    "package.json": "^2.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
