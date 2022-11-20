@@ -23,10 +23,6 @@ const FormBox = () => {
 
     return (
         <>
-            <Text color='#536895' fontWeight='bold' fontFamily=' URW Chancery L cursive' fontSize='5xl' mt={2}>
-                {isRegisterForm ? 'Register' : 'Login'}
-            </Text>
-
             <Box mt={200}>
                 {formView}
                 <Link onClick={changeForm} >

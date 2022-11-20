@@ -1,10 +1,10 @@
-import { Container } from "@chakra-ui/react"
+import { Container, HStack, Stack, VStack } from "@chakra-ui/react"
 import { useState } from 'react';
 import Login from './Forms/Login';
 import Register from './Forms/Register';
 
 import { Box, Link, Text } from "@chakra-ui/react"
-import './../../styles/Home/home.css'
+import './home.css'
 
 const Home = () => {
     const [isRegisterForm, setisRegisterForm] = useState(true);
@@ -24,20 +24,20 @@ const Home = () => {
     }
 
     return (
-        <Container bg='#212b36' minW='full' minH='container.xl' centerContent>
-            <Text color='#536895' fontWeight='bold' fontFamily=' URW Chancery L cursive' fontSize='5xl' mt={2}>
-                {isRegisterForm ? 'Register' : 'Login'}
-            </Text>
-
-            <Box mt={200}>
+        <Container bg='#f2f2f2' minW='full' minH='container.xl' >
+            <Container centerContent>
+                <Text color='#000080' as='i' fontFamily='cursive' fontSize='5xl' mt={2}>
+                    Book Web Finder
+                </Text>
+            </Container>
+            <Stack boxShadow='dark-lg' float='right' borderRadius={25}>
                 {formView}
                 <Link onClick={changeForm} >
                     <Text fontSize='xl' mt={3} color='azure'>
                         {formMessage}
                     </Text>
                 </Link>
-            </Box>
-
+            </Stack>
         </Container >
     );
 }

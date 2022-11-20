@@ -8,13 +8,13 @@ const cors = require('cors')
 const path = require('path')
 const app = express();
 
-const logger = require('./logger/logger')
+//const logger = require('./logger/logger')
 
 require('dotenv').config(
   {
     path: '.env.db'
   }
-)
+) 
 
 mongoose.connect(`${process.env.MONGODB_URI}`,
   {
@@ -30,7 +30,7 @@ mongoose.connect(`${process.env.MONGODB_URI}`,
 app.use(cors())
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'dist')))
-app.use(morgan("combined", { stream: logger.stream.write }));
+//app.use(morgan("combined", { stream: logger.stream.write }));
 
 const registerRouter = require('./routes/register.ts')
 const loginRouter = require('./routes/login.ts')
@@ -51,7 +51,6 @@ function errorHandler(err, req, res, next) {
     })
   }
 }
-
 
 //Global HTTP Request and Response. Logging and error handling. 
 app.use(function (req, res, next) {

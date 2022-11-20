@@ -106,9 +106,9 @@ const Register = (props) => {
         setregisterAttempt(false);
     }
 
+    /* Has to be moved to parent component ? Line of code on top level, regardless if it is a login or register page ? Pass setUserCreated object? */
     return (
         <>
-            // ***** Has to be moved to parent component ? Line of code on top level, regardless if it is a login or register page ? Pass setUserCreated object?
             {registerUserAttempt && <CustomAlert alertStatus={userCreated.status} message={userCreated.message} hideAlert={hideAlert} />}
 
             <Formik
