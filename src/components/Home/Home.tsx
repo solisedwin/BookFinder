@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Login from './Forms/Login';
 import Register from './Forms/Register';
 
-import { Box, Link, Text } from "@chakra-ui/react"
+import { Link, Text } from "@chakra-ui/react"
 import './home.css'
 
 const Home = () => {
@@ -16,7 +16,7 @@ const Home = () => {
     }
 
     if (isRegisterForm) {
-        formView = <Register changeParentFormState={changeForm} />;
+        formView = <Register/>;
         formMessage = "Already have an account? Login";
     } else {
         formView = <Login />;

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { ErrorMessage, Formik, Form, Field } from 'formik';
 import { DEVURL } from './../../../Constants';
-import './../../../styles/Home/forms.css'
+import './forms.css'
 import { VStack, Button } from "@chakra-ui/react"
 import TextError from './../../../Containers/TextError'
 import CustomAlert from './../../../Containers/CustomAlert'
@@ -15,7 +15,7 @@ interface IRegisterForm {
     passwordConfirmation: string
 }
 
-const Register = (props) => {
+const Register = () => {
 
     const [registerUserAttempt, setregisterAttempt] = useState(false);
 
@@ -27,7 +27,7 @@ const Register = (props) => {
     useEffect(() => {
         //Successfully registered new user, redirect to login page.
         if (userCreated.status === 'success') {
-            props.changeParentFormState();
+           alert('we created a new user')
         }
 
 

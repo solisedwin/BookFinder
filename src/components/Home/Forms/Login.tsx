@@ -2,6 +2,7 @@ import { ErrorMessage, Formik, Form, Field } from 'formik';
 import { VStack, Button } from "@chakra-ui/react"
 import TextError from './../../../Containers/TextError'
 import { DEVURL } from './../../../Constants';
+import './forms.css'
 import axios from 'axios';
 
 interface ILoginForm {
@@ -9,7 +10,7 @@ interface ILoginForm {
     password: string
 }
 
-const Login = (props) => {
+const Login = () => {
     const submitLoginForm = (loginUserForm: ILoginForm) => {
         axios
             .get(`http://${DEVURL}/login`, { data: loginUserForm })
