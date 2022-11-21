@@ -6,5 +6,5 @@ const UserController = require('./../controllers/User.controller.cjs');
 
 router.post('/', UserController.isUsernameTaken, UserController.hashPassword, UserController.saveUser);
 
-
-module.exports = router;
+//module.exports = router;
+export default router;

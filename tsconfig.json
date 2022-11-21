@@ -1,6 +1,6 @@
 {
+  "compileOnSave": true,
   "compilerOptions": {
-    "baseUrl": ".",
     "noImplicitAny": false,
     "allowJs": true,
     "esModuleInterop": true,
@@ -12,7 +12,7 @@
       "esnext"
     ],
     "isolatedModules": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,

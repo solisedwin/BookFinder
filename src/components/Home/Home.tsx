@@ -1,4 +1,4 @@
-import { Container, HStack, Stack, VStack } from "@chakra-ui/react"
+import { Container, Stack } from "@chakra-ui/react"
 import { useState } from 'react';
 import Login from './Forms/Login';
 import Register from './Forms/Register';
