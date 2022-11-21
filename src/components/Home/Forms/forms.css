@@ -1,12 +1,11 @@
 
 input[type='text'], input[type='password'] { 
-    background-color: #212b36;
+    
     border-bottom-color: grey;
     border-bottom-style: solid;
     border-bottom-width: 1px;
     font-size: larger;
     padding-left: 0.5rem;
-    color: azure;
     width: 30rem;
 }
 
