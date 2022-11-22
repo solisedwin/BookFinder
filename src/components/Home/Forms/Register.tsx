@@ -2,7 +2,7 @@ import axios from 'axios';
 import { ErrorMessage, Formik, Form, Field } from 'formik';
 import { DEVURL } from './../../../Constants';
 import './forms.css'
-import { VStack, Button } from "@chakra-ui/react"
+import { Button, Text, VStack } from "@chakra-ui/react"
 import TextError from './../../../Containers/TextError'
 import CustomAlert from './../../../Containers/CustomAlert'
 import { useState, useEffect } from 'react';
@@ -29,7 +29,6 @@ const Register = () => {
         if (userCreated.status === 'success') {
            alert('we created a new user')
         }
-
 
         return () => {
             setTimeout(() => {
@@ -109,6 +108,9 @@ const Register = () => {
     /* Has to be moved to parent component ? Line of code on top level, regardless if it is a login or register page ? Pass setUserCreated object? */
     return (
         <>
+
+            <Text fontSize='3xl' pt={3} pl={23} >Create your free account</Text>
+
             {registerUserAttempt && <CustomAlert alertStatus={userCreated.status} message={userCreated.message} hideAlert={hideAlert} />}
 
             <Formik
@@ -126,6 +128,7 @@ const Register = () => {
                                     align='stretch'
                                     mt={10}
                                 >
+                                    <label htmlFor="username">Username </label>
                                     <Field
                                         type='text'
                                         id='username'
@@ -135,6 +138,7 @@ const Register = () => {
                                     />
                                     <ErrorMessage name='username' component={TextError} />
 
+                                    <label htmlFor="Password">Password </label>
                                     <Field
                                         type='password'
                                         id='password'
@@ -144,12 +148,13 @@ const Register = () => {
                                     />
                                     <ErrorMessage name='password' component={TextError} />
 
+                                    <label htmlFor="passwordConfirmation">ReType Password </label  >
                                     <Field
                                         type='password'
                                         id='passwordConfirmation'
                                         name='passwordConfirmation'
                                         className='formik-field'
-                                        placeholder='Re Enter Password'
+                                        placeholder='ReType Password'
                                     />
                                     <ErrorMessage name='passwordConfirmation' component={TextError} />
 

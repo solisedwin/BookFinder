@@ -1,5 +1,5 @@
 import { ErrorMessage, Formik, Form, Field } from 'formik';
-import { VStack, Button } from "@chakra-ui/react"
+import { Button, Text, VStack } from "@chakra-ui/react"
 import TextError from './../../../Containers/TextError'
 import { DEVURL } from './../../../Constants';
 import './forms.css'
@@ -23,6 +23,8 @@ const Login = () => {
 
     return (
         <>
+            <Text fontSize='2xl' pl={29} pt={3} >Log in</Text>
+
             <Formik
                 initialValues={initialValues}
                 onSubmit={submitLoginForm}

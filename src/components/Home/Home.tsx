@@ -36,10 +36,10 @@ const Home = () => {
             </Flex>
                 <Divider orientation='horizontal' borderBottomColor='black' />
             </Container>
-            <Stack boxShadow='dark-lg' float='right' borderRadius={25} bg='#5f94cf' mt={9}>
+            <Stack float='right' mt={12} mr={3} bg='white' borderRadius={20} minW='30rem' minH='20rem' >
                 {formView}
-                <Link onClick={changeForm} >
-                    <Text fontSize='xl' mt={3} color='azure'>
+                <Link onClick={changeForm} paddingLeft={3} paddingBottom={3} bg='#212121'>
+                    <Text fontSize='md' mt={3} color='white' ml={100}>
                         {formMessage}
                     </Text>
                 </Link>

@@ -1,21 +1,21 @@
 
-input[type='text'], input[type='password'] { 
-    
-    border-bottom-color: grey;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    font-size: larger;
-    padding-left: 0.5rem;
-    width: 30rem;
+
+label { 
+  color: grey;
+  padding-left: 1rem;
 }
 
+input[type='text'], input[type='password'] { 
+    border-bottom-color: gray;
+    border-bottom-width: 0.2px;
+    font-size:large;
+    padding-left: 1rem;
+    width: fit-content;
+}
 
 input[type='text']:focus, input[type='password']:focus { 
-  background-color: none;
-  border-bottom-color: greenyellow;
-  color: azure;
-  outline: none;
-  
+  border-bottom-color: cornflowerblue;
+  outline: none;  
 }
 
 .form-error{
