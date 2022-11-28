@@ -109,7 +109,10 @@ const Register = () => {
     return (
         <>
 
-            <Text fontSize='3xl' pt={3} pl={23} >Create your free account</Text>
+            <Text fontSize='3xl'  pt={3} pl={23} >
+                    Create your 
+                <Text color='#000080'> free </Text> 
+            account</Text>
 
             {registerUserAttempt && <CustomAlert alertStatus={userCreated.status} message={userCreated.message} hideAlert={hideAlert} />}
 
