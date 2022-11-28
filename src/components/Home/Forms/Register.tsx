@@ -2,10 +2,11 @@ import axios from 'axios';
 import { ErrorMessage, Formik, Form, Field } from 'formik';
 import { DEVURL } from './../../../Constants';
 import './forms.css'
-import { Button, Text, VStack } from "@chakra-ui/react"
+import { Button, FormLabel, Text, VStack } from "@chakra-ui/react"
 import TextError from './../../../Containers/TextError'
 import CustomAlert from './../../../Containers/CustomAlert'
 import { useState, useEffect } from 'react';
+
 
 import * as Yup from 'yup';
 
@@ -109,9 +110,9 @@ const Register = () => {
     return (
         <>
 
-            <Text fontSize='3xl'  pt={3} pl={23} >
+            <Text fontSize='3xl'  pt={3} pl={23} display='flex'  >
                     Create your 
-                <Text color='#000080'> free </Text> 
+                <Text color='#000080' pl={2} pr={2} > free </Text> 
             account</Text>
 
             {registerUserAttempt && <CustomAlert alertStatus={userCreated.status} message={userCreated.message} hideAlert={hideAlert} />}
@@ -130,8 +131,10 @@ const Register = () => {
                                     spacing={35}
                                     align='stretch'
                                     mt={10}
+                                    ml={3}
+                                    
                                 >
-                                    <label htmlFor="username">Username </label>
+                                     <FormLabel>Username</FormLabel>
                                     <Field
                                         type='text'
                                         id='username'
@@ -141,7 +144,8 @@ const Register = () => {
                                     />
                                     <ErrorMessage name='username' component={TextError} />
 
-                                    <label htmlFor="Password">Password </label>
+                                    <FormLabel>Password</FormLabel>
+                                    
                                     <Field
                                         type='password'
                                         id='password'
@@ -151,7 +155,8 @@ const Register = () => {
                                     />
                                     <ErrorMessage name='password' component={TextError} />
 
-                                    <label htmlFor="passwordConfirmation">ReType Password </label  >
+                                    <FormLabel>ReType Password</FormLabel>
+                                  
                                     <Field
                                         type='password'
                                         id='passwordConfirmation'
@@ -160,9 +165,8 @@ const Register = () => {
                                         placeholder='ReType Password'
                                     />
                                     <ErrorMessage name='passwordConfirmation' component={TextError} />
-
-                                    <Button colorScheme="green" type='submit' fontSize='larger'>Register</Button>
                                 </VStack>
+                                <Button colorScheme="green" mt={5} w='full' type='submit' fontSize='larger'>Register</Button>
                             </Form>
                         )
                     }

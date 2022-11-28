@@ -1,23 +1,22 @@
 
-
-label { 
-  color: grey;
-  padding-left: 1rem;
+.form-error {
+      color:red;
 }
 
 input[type='text'], input[type='password'] { 
-    border-bottom-color: gray;
-    border-bottom-width: 0.2px;
-    font-size:large;
-    padding-left: 1rem;
-    width: fit-content;
+  border-bottom-color: gray;
+  border-bottom-width: 0.2px;
+  font-size:large;
+  padding-left: 1rem;
+  width: fit-content;
 }
 
 input[type='text']:focus, input[type='password']:focus { 
   border-bottom-color: cornflowerblue;
   outline: none;  
 }
-
-.form-error{
-    color:red;
+  
+label { 
+  color: grey;
+  padding-left: 1rem;
 }

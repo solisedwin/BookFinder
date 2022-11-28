@@ -38,7 +38,9 @@ const Login = () => {
                                     spacing={35}
                                     align='stretch'
                                     mt={10}
+                                    ml={3}
                                 >
+                                    
                                     <Field
                                         type='text'
                                         id='username'
@@ -56,8 +58,8 @@ const Login = () => {
                                         placeholder='Password'
                                     />
                                     <ErrorMessage name='password' component={TextError} />
-                                    <Button colorScheme="green" type='submit' fontSize='larger'>Login</Button>
                                 </VStack>
+                                    <Button colorScheme="green" mt={5} w='full' type='submit' fontSize='larger'>Login</Button>
                             </Form>
                         )
                     }
