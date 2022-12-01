@@ -7,7 +7,6 @@ import TextError from './../../../Containers/TextError'
 import CustomAlert from './../../../Containers/CustomAlert'
 import { useState, useEffect } from 'react';
 
-
 import * as Yup from 'yup';
 
 interface IRegisterForm {

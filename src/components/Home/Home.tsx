@@ -1,8 +1,10 @@
 import { Container, Stack } from "@chakra-ui/react"
 import { useState } from 'react';
+import Carousel from './Carousel/carousel'
 import Login from './Forms/Login';
 import Register from './Forms/Register';
 import bookImage from '../../assets/book.png'
+
 
 import {Divider, Flex, Image, Link,  Text } from "@chakra-ui/react"
 import './home.css'
@@ -36,6 +38,9 @@ const Home = () => {
             </Flex>
                 <Divider orientation='horizontal' borderBottomColor='black' />
             </Container>
+
+            <Carousel/>
+
             <Stack float='right' mt={12} mr={3} bg='white' borderRadius={20} minW='30rem' minH='20rem' >
                 {formView}
                 <Link onClick={changeForm} paddingLeft={3} paddingBottom={3} bg='#212121'>
