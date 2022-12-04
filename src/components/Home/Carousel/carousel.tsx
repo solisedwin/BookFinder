@@ -6,8 +6,6 @@ import manyBooks from './Images/many_books.png'
 import bookShelf from './Images/book_shelf.png'
 import headBookShelf from './Images/head_book_shelf.png'
 
-
-
 const Carousel = () => {
 
     const  [isChangingImage, setisChangingImage] = useState(true);
@@ -19,13 +17,13 @@ const Carousel = () => {
     const changeImageTimer = () => {
          setInterval( ()=> {
             setisChangingImage(slideImage => !slideImage)
-        }, 3000)
+        }, 4000)
     }
-
+    
     useEffect ( ()=> {
         changeImageTimer();
     }, [])
-
+    
     useEffect( ()=> {
         if(index + 1 >= images.length ){
             setIndex(0)
@@ -37,7 +35,7 @@ const Carousel = () => {
    
     return (
        <>
-        <SlideFade in={isChangingImage}>
+        <SlideFade in={true}>
         <Box boxSize='sm' >
           <Image src={currentImage} alt='Book' />
         </Box>

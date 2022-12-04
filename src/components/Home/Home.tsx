@@ -5,7 +5,6 @@ import Login from './Forms/Login';
 import Register from './Forms/Register';
 import bookImage from '../../assets/book.png'
 
-
 import {Divider, Flex, Image, Link,  Text } from "@chakra-ui/react"
 import './home.css'
 
