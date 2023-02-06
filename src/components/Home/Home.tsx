@@ -1,11 +1,10 @@
-import { Container, Stack } from "@chakra-ui/react"
 import { useState } from 'react';
-import Carousel from './Carousel/carousel'
+import Header from './Header/Header'
+import Slideshow from './SlideShow/Slideshow';
 import Login from './Forms/Login';
 import Register from './Forms/Register';
-import bookImage from '../../assets/book.png'
 
-import {Divider, Flex, Image, Link,  Text } from "@chakra-ui/react"
+import {Container, Link, Stack, Text} from "@chakra-ui/react"
 import './home.css'
 
 const Home = () => {
@@ -27,18 +26,8 @@ const Home = () => {
 
     return (
         <Container bg='#f2f2f2' minW='full' minH='container.xl' >
-            <Container  minW='full' >
-            <Flex>
-                <Image src={bookImage} alt='Book' height='4.5em' paddingTop='1.5em' paddingRight='1em'/>
-            
-                <Text color='#000080' as='i' fontFamily='cursive' fontSize='5xl' mt={2}>
-                    Book Web Finder
-                </Text>
-            </Flex>
-                <Divider orientation='horizontal' borderBottomColor='black' />
-            </Container>
-
-            <Carousel/>
+           <Header/>
+            <Slideshow/>
 
             <Stack float='right' mt={12} mr={3} bg='white' borderRadius={20} minW='30rem' minH='20rem' >
                 {formView}
