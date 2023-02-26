@@ -5,7 +5,7 @@ import './forms.css'
 import { Button, FormLabel, Text, VStack } from "@chakra-ui/react"
 import TextError from './../../../Containers/TextError'
 import CustomAlert from './../../../Containers/CustomAlert'
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import * as Yup from 'yup';
 
