@@ -6,8 +6,8 @@ import {ReadingImage, BookShelfImage, DataAnalysisImage } from './SlideShowImage
 
 const Slideshow = () => {
 
-    const [, setSlideShowIndex] = useState(0)
-    const [m, setMessage] = useState([
+    const [slideShowIndex, setSlideShowIndex] = useState(0)
+    const [imageContainer, setImageContainer] = useState([
     {
         image: ReadingImage,
         message: 'Scour the internet for books that are customized to your personal interests.',
