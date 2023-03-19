@@ -1,20 +1,31 @@
 import React, {useEffect, useState} from "react"
-import { Button, Box, Container, Heading, Image, Text} from "@chakra-ui/react"
-import {SlideFade, useDisclosure } from '@chakra-ui/react'
+import { Box, Container, Heading, Image, Text} from "@chakra-ui/react"
+import {SlideFade } from '@chakra-ui/react'
+
+import {ReadingImage, BookShelfImage, DataAnalysisImage } from './SlideShowImages/index.js'
 
 const Slideshow = () => {
-    //const { isOpen, onToggle } = useDisclosure()
-    const [messageIndex, setMessageIndex] = useState(0)
-    const [message, setMessage] = useState([
-        'Scour the internet for books that are customized to your personal interests.',
-        'Save and organize your boooks for later reading',
-        'View book analysis data to optimize your reading experience'
+
+    const [, setSlideShowIndex] = useState(0)
+    const [m, setMessage] = useState([
+    {
+        image: ReadingImage,
+        message: 'Scour the internet for books that are customized to your personal interests.',
+    },
+    {
+        image: BookShelfImage,
+        message: 'Save and organize your boooks for later reading',
+    },
+    {
+        image: DataAnalysisImage,
+        message:'View book analysis data to optimize your reading experience'
+    }
     ])
 
+/*
     let slideShowMessage = message[messageIndex]
 
     const changeSlideShowMessage = () => {
-        //debugger;
         if(messageIndex + 1 >= 2){
             setMessageIndex(0) 
         }
@@ -24,7 +35,7 @@ const Slideshow = () => {
     
     useEffect(()=>{
         setInterval(changeSlideShowMessage, 3000)
-    }, [])   
+    }, [])   */
  
     return (
       <Container  position='absolute' minW='55%'> 
@@ -39,9 +50,8 @@ const Slideshow = () => {
                 rounded='md'
                 shadow='md'
             >  
-           
             <Heading size='md' mt={5}>
-               {slideShowMessage} 
+
             </Heading>
 
             </Box>
