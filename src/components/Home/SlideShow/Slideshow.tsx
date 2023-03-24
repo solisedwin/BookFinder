@@ -23,27 +23,19 @@ const Slideshow = () => {
     ]
 
     const changeSlideShow =  () => {
-        console.log(`Current index: ${slideShowIndex}`);
-        setSlideShowIndex(index => index + 1)
         if (slideShowIndex >= 2){
             setSlideShowIndex(0)
+            return
         }
+        setSlideShowIndex(index => index + 1)
     }
 
     useEffect(()=>{
-       const slideShowTimer = setInterval(changeSlideShow, 4000)
+       const slideShowTimer = setInterval(changeSlideShow, 3500)
         return () => {
             clearInterval(slideShowTimer);
         }
-    }, [])   
-
-    
-    useEffect(()=>{
-        if(slideShowIndex >= 2){
-            setSlideShowIndex(0);
-        }
-     }, [slideShowIndex])   
- 
+    }, [slideShowIndex])   
 
     return (
       <Container  position='absolute' minW='55%'> 
@@ -58,7 +50,6 @@ const Slideshow = () => {
                 rounded='md'
                 shadow='md'
             >  
-
 
             <Heading size='md' mt={5}>
                 {   slides[slideShowIndex].message   }
