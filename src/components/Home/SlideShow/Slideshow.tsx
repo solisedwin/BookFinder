@@ -7,7 +7,7 @@ import {ReadingImage, BookShelfImage, DataAnalysisImage } from './SlideShowImage
 const Slideshow = () => {
 
     const [slideShowIndex, setSlideShowIndex] = useState(0)
-    const [imageContainer, setImageContainer] = useState([
+    const slides = [
     {
         image: ReadingImage,
         message: 'Scour the internet for books that are customized to your personal interests.',
@@ -20,23 +20,31 @@ const Slideshow = () => {
         image: DataAnalysisImage,
         message:'View book analysis data to optimize your reading experience'
     }
-    ])
+    ]
 
-/*
-    let slideShowMessage = message[messageIndex]
-
-    const changeSlideShowMessage = () => {
-        if(messageIndex + 1 >= 2){
-            setMessageIndex(0) 
+    const changeSlideShow =  () => {
+        console.log(`Current index: ${slideShowIndex}`);
+        setSlideShowIndex(index => index + 1)
+        if (slideShowIndex >= 2){
+            setSlideShowIndex(0)
         }
-        slideShowMessage = message[messageIndex]
-        setMessageIndex(messageIndex => messageIndex + 1)
     }
+
+    useEffect(()=>{
+       const slideShowTimer = setInterval(changeSlideShow, 4000)
+        return () => {
+            clearInterval(slideShowTimer);
+        }
+    }, [])   
+
     
     useEffect(()=>{
-        setInterval(changeSlideShowMessage, 3000)
-    }, [])   */
+        if(slideShowIndex >= 2){
+            setSlideShowIndex(0);
+        }
+     }, [slideShowIndex])   
  
+
     return (
       <Container  position='absolute' minW='55%'> 
             <SlideFade in={true}>
@@ -50,9 +58,16 @@ const Slideshow = () => {
                 rounded='md'
                 shadow='md'
             >  
-            <Heading size='md' mt={5}>
 
+
+            <Heading size='md' mt={5}>
+                {   slides[slideShowIndex].message   }
             </Heading>
+
+            <Image
+            src={slides[slideShowIndex].image}
+            >
+            </Image>
 
             </Box>
             </SlideFade>
