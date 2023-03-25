@@ -14,7 +14,7 @@ const Slideshow = () => {
     },
     {
         image: BookShelfImage,
-        message: 'Save and organize your boooks for later reading',
+        message: 'Save and organize your books for later reading',
     },
     {
         image: DataAnalysisImage,
@@ -38,25 +38,28 @@ const Slideshow = () => {
     }, [slideShowIndex])   
 
     return (
-      <Container  position='absolute' minW='55%'> 
+      <Container  position='absolute' minW='50%'> 
             <SlideFade in={true}>
             <Box
                 p='2.5rem'
                 color='white'
                 mt='7'
                 ml='5%'
-                minW={30}
+                minW={28}
                 bg='teal.500'
                 rounded='md'
                 shadow='md'
             >  
 
-            <Heading size='md' mt={5}>
+            <Heading size='md' textAlign='center'>
                 {   slides[slideShowIndex].message   }
             </Heading>
 
+
             <Image
+            boxSize='40rem'
             src={slides[slideShowIndex].image}
+            ml={5}
             >
             </Image>
 
