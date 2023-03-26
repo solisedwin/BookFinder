@@ -31,7 +31,7 @@ const Slideshow = () => {
     }
 
     useEffect(()=>{
-       const slideShowTimer = setInterval(changeSlideShow, 3500)
+       const slideShowTimer = setInterval(changeSlideShow, 3000)
         return () => {
             clearInterval(slideShowTimer);
         }
@@ -54,7 +54,6 @@ const Slideshow = () => {
             <Heading size='md' textAlign='center'>
                 {   slides[slideShowIndex].message   }
             </Heading>
-
 
             <Image
             boxSize='40rem'
