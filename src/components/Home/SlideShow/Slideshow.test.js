@@ -1,8 +1,9 @@
 
-import { act, render, screen, waitFor } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import React from "react"
 import {ReadingImage, BookShelfImage, DataAnalysisImage } from './SlideShowImages/index.js'
 import Slideshow from './Slideshow';
+import "@testing-library/jest-dom";
 
 beforeEach(() =>{
     jest.useFakeTimers();
