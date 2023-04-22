@@ -1,3 +1,4 @@
+import React from "react"
 import {Container, Divider, Flex, Image,  Text } from "@chakra-ui/react"
 import bookImage from '../../../assets/book.png'
 
