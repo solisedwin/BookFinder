@@ -11,7 +11,7 @@ interface ILoginForm {
     password: string
 }
 
-const Login = () => {
+const Login = ({handleClick}) => {
     const submitLoginForm = (loginUserForm: ILoginForm) => {
         axios
             .get(`http://${DEVURL}/login`, { data: loginUserForm })

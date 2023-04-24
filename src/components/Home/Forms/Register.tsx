@@ -15,7 +15,7 @@ interface IRegisterForm {
     passwordConfirmation: string
 }
 
-const Register = () => {
+const Register = ({handleClick}) => {
 
     const [registerUserAttempt, setregisterAttempt] = useState(false);
 
